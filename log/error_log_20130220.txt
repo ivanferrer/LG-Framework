@@ -1,0 +1,22 @@
+/************************************************** 
+ * Arquivo de log 
+ * 
+ * Data Criação: 20/02/2013 04:30 
+ *************************************************/ 
+——————————————————————- 
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 20/02/2013 - 04:30:34 
+Erro [ 0 ]: C:\xampp\LGFramework\core\Autenticador.php linha ( 46 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Área Restrita. Login ou Senha inválidos 
+Trace: 
+{
+0 C:\xampp\LGFramework\core\Pagina.php(60): core\Autenticador->verificarAcesso('todos', Array)
+
+1 C:\xampp\LGFramework\core\Roteador.php(44): core\Pagina->verificarAcesso()
+
+2 C:\xampp\htdocs\site\index.php(11): core\Roteador->verificarAcesso()
+
+3 {main}} 
+——————————————————————- 
+
