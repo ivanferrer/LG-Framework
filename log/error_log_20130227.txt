@@ -1,0 +1,364 @@
+/************************************************** 
+ * Arquivo de log 
+ * 
+ * Data Criação: 27/02/2013 03:22 
+ *************************************************/ 
+——————————————————————- 
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 27/02/2013 - 03:22:51 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'core\PDO' not found26C:\xampp\LGFramework\core\Setup.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 27/02/2013 - 03:23:04 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'Consumidor' not found26C:\xampp\LGFramework\core\Setup.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 27/02/2013 - 03:23:22 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'modelo\Consumidor' not found26C:\xampp\LGFramework\core\Setup.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 27/02/2013 - 03:23:55 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Undefined constant 'core\modelo\Consumidor'26C:\xampp\LGFramework\core\Setup.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 27/02/2013 - 03:24:07 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Undefined constant 'modelo\Consumidor'26C:\xampp\LGFramework\core\Setup.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 27/02/2013 - 03:24:23 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'Consumidor' not found26C:\xampp\LGFramework\core\Setup.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 27/02/2013 - 03:27:12 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'modelo\Consumidor' not found26C:\xampp\LGFramework\core\Setup.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 27/02/2013 - 03:27:44 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'core\modelo\Consumidor' not found24C:\xampp\LGFramework\core\Setup.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 27/02/2013 - 03:27:53 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'modelo\Consumidor' not found24C:\xampp\LGFramework\core\Setup.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 27/02/2013 - 03:30:24 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'core\modelo\Consumidor' not found24C:\xampp\LGFramework\core\Setup.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 27/02/2013 - 03:31:55 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'model\Usuario' not found9C:\xampp\htdocs\ge\view\Home.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 27/02/2013 - 03:32:08 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'modelo\Usuario' not found9C:\xampp\htdocs\ge\view\Home.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 27/02/2013 - 03:33:53 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'modelo\Usuario' not found9C:\xampp\htdocs\ge\view\Configuracoes.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 27/02/2013 - 03:34:20 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'core\modelo\Consumidor' not found24C:\xampp\LGFramework\core\Setup.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 27/02/2013 - 03:34:42 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class '\modelo\Consumidor' not found25C:\xampp\LGFramework\core\Setup.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 27/02/2013 - 03:34:50 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'modelo\Consumidor' not found25C:\xampp\LGFramework\core\Setup.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 27/02/2013 - 03:40:24 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Call to a member function fetch() on a non-object30C:\xampp\LGFramework\core\Setup.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 27/02/2013 - 03:45:11 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Uncaught exception 'exceptions\PHPException' with message 'PDOStatement::fetch() expects parameter 2 to be long, string given' in C:\xampp\LGFramework\core\Setup.php:26
+Stack trace:
+#0 C:\xampp\LGFramework\system\erros.php(13): exceptions\PHPException::throwError(2, 'PDOStatement::f...', 'C:\xampp\LGFram...', 26)
+#1 [internal function]: handleError(2, 'PDOStatement::f...', 'C:\xampp\LGFram...', 26, Array)
+#2 C:\xampp\LGFramework\lib\smarty\Smarty.class.php(1421): call_user_func('handleError', 2, 'PDOStatement::f...', 'C:\xampp\LGFram...', 26, Array)
+#3 [internal function]: Smarty::mutingErrorHandler(2, 'PDOStatement::f...', 'C:\xampp\LGFram...', 26, Array)
+#4 C:\xampp\LGFramework\core\Setup.php(26): PDOStatement->fetch(1048584, 'model\Consumido...')
+#5 C:\xampp\htdocs\ge\index.php(34): core\Setup->montarFormulario()
+#6 {main}
+  thrown26C:\xampp\LGFramework\core\Setup.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 27/02/2013 - 04:17:14 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Uncaught exception 'exceptions\PHPException' with message 'file_put_contents(C:\xampp\htdocs\ge\Modelo\Comissao) [<a href='function.file-put-contents'>function.file-put-contents</a>]: failed to open stream: No such file or directory' in C:\xampp\LGFramework\core\Setup.php:57
+Stack trace:
+#0 C:\xampp\LGFramework\system\erros.php(13): exceptions\PHPException::throwError(2, 'file_put_conten...', 'C:\xampp\LGFram...', 57)
+#1 [internal function]: handleError(2, 'file_put_conten...', 'C:\xampp\LGFram...', 57, Array)
+#2 C:\xampp\LGFramework\lib\smarty\Smarty.class.php(1421): call_user_func('handleError', 2, 'file_put_conten...', 'C:\xampp\LGFram...', 57, Array)
+#3 [internal function]: Smarty::mutingErrorHandler(2, 'file_put_conten...', 'C:\xampp\LGFram...', 57, Array)
+#4 C:\xampp\LGFramework\core\Setup.php(57): file_put_contents('C:\xampp\htdocs...', '<?php?/*?? *?? ...')
+#5 C:\xampp\LGFramework\core\Setup.php(39): core\Setup->salvarArquivo('C:\xampp\htdocs...', '<?php?/*?? *?? ...')
+#6 C:\xampp\htdocs\ge\index.php(57C:\xampp\LGFramework\core\Setup.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 27/02/2013 - 08:12:37 
+Erro [ 0 ]: /var/www/projetos/LGFramework/v1/system/erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Uncaught exception 'PDOException' with message 'SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ge.revenda' doesn't exist' in /var/www/projetos/LGFramework/v1/core/Setup.php:71
+Stack trace:
+#0 /var/www/projetos/LGFramework/v1/core/Setup.php(71): PDO->query('describe revend...')
+#1 /var/www/projetos/LGFramework/v1/core/Setup.php(38): core\Setup->gerarModelo('revenda')
+#2 /var/www/projetos/ge/html/index.php(35): core\Setup->tratarAcao()
+#3 {main}
+  thrown71/var/www/projetos/LGFramework/v1/core/Setup.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 27/02/2013 - 08:13:49 
+Erro [ 0 ]: /var/www/projetos/LGFramework/v1/system/erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Uncaught exception 'PDOException' with message 'SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ge.revenda' doesn't exist' in /var/www/projetos/LGFramework/v1/core/Setup.php:71
+Stack trace:
+#0 /var/www/projetos/LGFramework/v1/core/Setup.php(71): PDO->query('describe revend...')
+#1 /var/www/projetos/LGFramework/v1/core/Setup.php(38): core\Setup->gerarModelo('revenda')
+#2 /var/www/projetos/ge/html/index.php(35): core\Setup->tratarAcao()
+#3 {main}
+  thrown71/var/www/projetos/LGFramework/v1/core/Setup.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 27/02/2013 - 11:15:18 
+Erro [ 0 ]: /var/www/projetos/LGFramework/v1/system/erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Uncaught exception 'PDOException' with message 'SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ge.revenda' doesn't exist' in /var/www/projetos/LGFramework/v1/core/Setup.php:71
+Stack trace:
+#0 /var/www/projetos/LGFramework/v1/core/Setup.php(71): PDO->query('describe revend...')
+#1 /var/www/projetos/LGFramework/v1/core/Setup.php(38): core\Setup->gerarModelo('revenda')
+#2 /var/www/projetos/ge/html/index.php(35): core\Setup->tratarAcao()
+#3 {main}
+  thrown71/var/www/projetos/LGFramework/v1/core/Setup.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 27/02/2013 - 11:18:46 
+Erro [ 0 ]: /var/www/projetos/LGFramework/v1/system/erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Call to a member function query() on a non-object24/var/www/projetos/LGFramework/v1/core/Setup.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 27/02/2013 - 15:29:56 
+Erro [ 0 ]: /var/www/projetos/LGFramework/v1/system/erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:syntax error, unexpected '}', expecting ',' or ';'172/var/www/projetos/LGFramework/v1/core/Setup.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 27/02/2013 - 16:27:42 
+Erro [ 0 ]: /var/www/projetos/LGFramework/v1/system/erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:syntax error, unexpected '}'156/var/www/projetos/LGFramework/v1/core/Setup.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 27/02/2013 - 17:55:50 
+Erro [ 0 ]: /var/www/projetos/LGFramework/v1/system/erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Uncaught exception 'exceptions\PHPException' with message 'implode(): Invalid arguments passed' in /var/www/projetos/LGFramework/v1/core/Setup.php:168
+Stack trace:
+#0 /var/www/projetos/LGFramework/v1/system/erros.php(13): exceptions\PHPException::throwError(2, 'implode(): Inva...', '/var/www/projet...', 168)
+#1 [internal function]: handleError(2, 'implode(): Inva...', '/var/www/projet...', 168, Array)
+#2 /var/www/projetos/LGFramework/v1/lib/smarty/Smarty.class.php(1421): call_user_func('handleError', 2, 'implode(): Inva...', '/var/www/projet...', 168, Array)
+#3 [internal function]: Smarty::mutingErrorHandler(2, 'implode(): Inva...', '/var/www/projet...', 168, Array)
+#4 /var/www/projetos/LGFramework/v1/core/Setup.php(168): implode(',', ''Gerada','Paga'')
+#5 /var/www/projetos/LGFramework/v1/core/Setup.php(99): core\Setup->gerarSetter(Array)
+#6 /var/www/projetos/LGFramework/v1/core/Setup.php(38): core\Setup->gerarModelo('comissao')
+#7 /var/www/projetos/ge/html/index.php(35): core\Setup->tratarAcao()
+#8 {main}
+  168/var/www/projetos/LGFramework/v1/core/Setup.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+

@@ -1,0 +1,409 @@
+/************************************************** 
+ * Arquivo de log 
+ * 
+ * Data Criação: 26/02/2013 13:06 
+ *************************************************/ 
+——————————————————————- 
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 26/02/2013 - 13:06:49 
+Erro [ 0 ]: /var/www/projetos/LGFramework/system/erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'DAO' not found3/var/www/projetos/LGFramework/core/Setup.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 26/02/2013 - 13:07:03 
+Erro [ 0 ]: /var/www/projetos/LGFramework/system/erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Call to undefined method core\Setup::tratarAcao()18/var/www/projetos/LGFramework/core/Roteador.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 26/02/2013 - 13:07:11 
+Erro [ 0 ]: /var/www/projetos/LGFramework/system/erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Call to undefined method core\Setup::tratarAcao()18/var/www/projetos/LGFramework/core/Roteador.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 26/02/2013 - 13:08:02 
+Erro [ 8 ]: /var/www/projetos/LGFramework/core/Setup.php linha ( 15 ) 
+Mensagem Usuário:Erro Geral 
+Mensagem Interna:Undefined index: gerar 
+Trace: 
+{
+0 /var/www/projetos/LGFramework/system/erros.php(13): exceptions\PHPException::throwError(8, 'Undefined index...', '/var/www/projet...', 15)
+
+1 /var/www/projetos/LGFramework/core/Setup.php(15): handleError(8, 'Undefined index...', '/var/www/projet...', 15, Array)
+
+2 /var/www/projetos/LGFramework/core/Roteador.php(18): core\Setup->tratarAcao()
+
+3 /var/www/projetos/ge/html/index.php(10): core\Roteador->__construct('setup')
+
+4 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 26/02/2013 - 13:08:29 
+Erro [ 0 ]: /var/www/projetos/LGFramework/system/erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Call to undefined method PDO::execute()17/var/www/projetos/LGFramework/core/Setup.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 26/02/2013 - 13:09:50 
+Erro [ 0 ]: /var/www/projetos/LGFramework/system/erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'core\PDO' not found17/var/www/projetos/LGFramework/core/Setup.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 26/02/2013 - 13:13:37 
+Erro [ 0 ]: /var/www/projetos/LGFramework/system/erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'core\SetupException' not found16/var/www/projetos/LGFramework/core/Roteador.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 26/02/2013 - 13:13:39 
+Erro [ 0 ]: /var/www/projetos/LGFramework/system/erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'core\SetupException' not found16/var/www/projetos/LGFramework/core/Roteador.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 26/02/2013 - 13:14:18 
+Erro [ 0 ]: /var/www/projetos/LGFramework/system/erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'Setup' not found34/var/www/projetos/ge/html/index.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 26/02/2013 - 13:14:31 
+Erro [ 0 ]: /var/www/projetos/LGFramework/system/erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Uncaught exception 'exceptions\PHPException' with message 'Undefined index: gerar' in /var/www/projetos/LGFramework/core/Setup.php:15
+Stack trace:
+#0 /var/www/projetos/LGFramework/system/erros.php(13): exceptions\PHPException::throwError(8, 'Undefined index...', '/var/www/projet...', 15)
+#1 /var/www/projetos/LGFramework/core/Setup.php(15): handleError(8, 'Undefined index...', '/var/www/projet...', 15, Array)
+#2 /var/www/projetos/ge/html/index.php(36): core\Setup->tratarAcao()
+#3 {main}
+  thrown15/var/www/projetos/LGFramework/core/Setup.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 26/02/2013 - 13:16:01 
+Erro [ 0 ]: /var/www/projetos/LGFramework/system/erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Uncaught exception 'exceptions\PHPException' with message 'Undefined offset: 0' in /var/www/projetos/LGFramework/core/Setup.php:12
+Stack trace:
+#0 /var/www/projetos/LGFramework/system/erros.php(13): exceptions\PHPException::throwError(8, 'Undefined offse...', '/var/www/projet...', 12)
+#1 /var/www/projetos/LGFramework/core/Setup.php(12): handleError(8, 'Undefined offse...', '/var/www/projet...', 12, Array)
+#2 /var/www/projetos/ge/html/index.php(35): core\Setup->montarFormulario()
+#3 {main}
+  thrown12/var/www/projetos/LGFramework/core/Setup.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 26/02/2013 - 13:16:02 
+Erro [ 0 ]: /var/www/projetos/LGFramework/system/erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Uncaught exception 'exceptions\PHPException' with message 'Undefined offset: 0' in /var/www/projetos/LGFramework/core/Setup.php:12
+Stack trace:
+#0 /var/www/projetos/LGFramework/system/erros.php(13): exceptions\PHPException::throwError(8, 'Undefined offse...', '/var/www/projet...', 12)
+#1 /var/www/projetos/LGFramework/core/Setup.php(12): handleError(8, 'Undefined offse...', '/var/www/projet...', 12, Array)
+#2 /var/www/projetos/ge/html/index.php(35): core\Setup->montarFormulario()
+#3 {main}
+  thrown12/var/www/projetos/LGFramework/core/Setup.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 26/02/2013 - 13:16:03 
+Erro [ 0 ]: /var/www/projetos/LGFramework/system/erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Uncaught exception 'exceptions\PHPException' with message 'Undefined offset: 0' in /var/www/projetos/LGFramework/core/Setup.php:12
+Stack trace:
+#0 /var/www/projetos/LGFramework/system/erros.php(13): exceptions\PHPException::throwError(8, 'Undefined offse...', '/var/www/projet...', 12)
+#1 /var/www/projetos/LGFramework/core/Setup.php(12): handleError(8, 'Undefined offse...', '/var/www/projet...', 12, Array)
+#2 /var/www/projetos/ge/html/index.php(35): core\Setup->montarFormulario()
+#3 {main}
+  thrown12/var/www/projetos/LGFramework/core/Setup.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 26/02/2013 - 13:20:17 
+Erro [ 0 ]: /var/www/projetos/LGFramework/system/erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Uncaught exception 'exceptions\PHPException' with message 'Undefined variable: class' in /var/www/projetos/LGFramework/core/Setup.php:28
+Stack trace:
+#0 /var/www/projetos/LGFramework/system/erros.php(13): exceptions\PHPException::throwError(8, 'Undefined varia...', '/var/www/projet...', 28)
+#1 /var/www/projetos/LGFramework/core/Setup.php(28): handleError(8, 'Undefined varia...', '/var/www/projet...', 28, Array)
+#2 /var/www/projetos/LGFramework/core/Setup.php(12): core\Setup->converterNomeParaClasse('comissao')
+#3 /var/www/projetos/ge/html/index.php(35): core\Setup->montarFormulario()
+#4 {main}
+  thrown28/var/www/projetos/LGFramework/core/Setup.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 26/02/2013 - 13:49:09 
+Erro [ 0 ]: /var/www/projetos/LGFramework/system/erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'core\Smarty' not found9/var/www/projetos/LGFramework/core/Setup.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 26/02/2013 - 13:49:47 
+Erro [ 0 ]: /var/www/projetos/LGFramework/system/erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Uncaught exception 'SmartyException' with message 'Unable to load template file '404.tpl'' in /var/www/projetos/LGFramework/lib/smarty/sysplugins/smarty_internal_templatebase.php:127
+Stack trace:
+#0 /var/www/projetos/LGFramework/lib/smarty/sysplugins/smarty_internal_templatebase.php(374): Smarty_Internal_TemplateBase->fetch('404.tpl', NULL, NULL, NULL, true)
+#1 /var/www/projetos/LGFramework/core/Setup.php(16): Smarty_Internal_TemplateBase->display('404.tpl')
+#2 /var/www/projetos/ge/html/index.php(33): core\Setup->__construct()
+#3 {main}
+  thrown127/var/www/projetos/LGFramework/lib/smarty/sysplugins/smarty_internal_templatebase.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 26/02/2013 - 13:52:04 
+Erro [ 0 ]: /var/www/projetos/LGFramework/system/erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Uncaught exception 'SmartyException' with message 'Unable to load template file 'estrutura/menu_lateral.tpl' in 'estrutura/template_start.tpl'' in /var/www/projetos/LGFramework/lib/smarty/sysplugins/smarty_internal_templatebase.php:127
+Stack trace:
+#0 /var/www/projetos/LGFramework/lib/smarty/sysplugins/smarty_internal_template.php(286): Smarty_Internal_TemplateBase->fetch(NULL, NULL, NULL, NULL, false, false, true)
+#1 /var/www/projetos/LGFramework/lib/smarty/templates_c/3b3169fdcc476e18e228ee1b3a405cdba37cf0a8.file.template_start.tpl.php(31): Smarty_Internal_Template->getSubTemplate('estrutura/menu_...', NULL, NULL, NULL, NULL, Array, 0)
+#2 /var/www/projetos/LGFramework/lib/smarty/sysplugins/smarty_internal_templatebase.php(180): content_512ce7f207eb11_76368922(Object(Smarty_Internal_Template))
+#3 /var/www/projetos/LGFramework/lib/smarty/sysplugins/smarty_internal_template.php(286): Smarty_Internal_TemplateBase->fetch(NULL, NULL, NULL, NULL, false, false, true)
+#4 /var/www/projetos/LGFramework/lib/smarty/temp127/var/www/projetos/LGFramework/lib/smarty/sysplugins/smarty_internal_templatebase.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 26/02/2013 - 14:14:00 
+Erro [ 0 ]: /var/www/projetos/LGFramework/system/erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:syntax error, unexpected T_PUBLIC, expecting ',' or ';'8/var/www/projetos/LGFramework/core/Setup.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 26/02/2013 - 14:14:10 
+Erro [ 0 ]: /var/www/projetos/LGFramework/system/erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:syntax error, unexpected T_PUBLIC, expecting ',' or ';'8/var/www/projetos/LGFramework/core/Setup.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 26/02/2013 - 16:04:08 
+Erro [ 0 ]: /var/www/projetos/LGFramework/system/erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:syntax error, unexpected T_PUBLIC, expecting ',' or ';'8/var/www/projetos/LGFramework/core/Setup.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 26/02/2013 - 16:11:06 
+Erro [ 0 ]: /var/www/projetos/LGFramework/system/erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:syntax error, unexpected ';'40/var/www/projetos/LGFramework/core/Setup.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 26/02/2013 - 16:15:41 
+Erro [ 0 ]: /var/www/projetos/LGFramework/system/erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Uncaught exception 'exceptions\PHPException' with message 'ucwords() expects parameter 1 to be string, array given' in /var/www/projetos/LGFramework/core/Setup.php:46
+Stack trace:
+#0 /var/www/projetos/LGFramework/system/erros.php(13): exceptions\PHPException::throwError(2, 'ucwords() expec...', '/var/www/projet...', 46)
+#1 [internal function]: handleError(2, 'ucwords() expec...', '/var/www/projet...', 46, Array)
+#2 /var/www/projetos/LGFramework/lib/smarty/Smarty.class.php(1421): call_user_func('handleError', 2, 'ucwords() expec...', '/var/www/projet...', 46, Array)
+#3 [internal function]: Smarty::mutingErrorHandler(2, 'ucwords() expec...', '/var/www/projet...', 46, Array)
+#4 /var/www/projetos/LGFramework/core/Setup.php(46): ucwords(Array)
+#5 /var/www/projetos/LGFramework/core/Setup.php(39): core\Setup->classeFromTabela(Array)
+#6 /var/www/projetos/ge/html/index.php(35): core\Setup->tratarAcao()
+#7 {main}
+  thrown46/var/www/projetos/LGFramework/core/Setup.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 26/02/2013 - 16:17:14 
+Erro [ 0 ]: /var/www/projetos/LGFramework/system/erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Uncaught exception 'exceptions\PHPException' with message 'Invalid argument supplied for foreach()' in /var/www/projetos/LGFramework/core/Setup.php:37
+Stack trace:
+#0 /var/www/projetos/LGFramework/system/erros.php(13): exceptions\PHPException::throwError(2, 'Invalid argumen...', '/var/www/projet...', 37)
+#1 [internal function]: handleError(2, 'Invalid argumen...', '/var/www/projet...', 37, Array)
+#2 /var/www/projetos/LGFramework/lib/smarty/Smarty.class.php(1421): call_user_func('handleError', 2, 'Invalid argumen...', '/var/www/projet...', 37, Array)
+#3 /var/www/projetos/LGFramework/core/Setup.php(37): Smarty::mutingErrorHandler(2, 'Invalid argumen...', '/var/www/projet...', 37, Array)
+#4 /var/www/projetos/ge/html/index.php(35): core\Setup->tratarAcao()
+#5 {main}
+  thrown37/var/www/projetos/LGFramework/core/Setup.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 26/02/2013 - 16:17:18 
+Erro [ 0 ]: /var/www/projetos/LGFramework/system/erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Uncaught exception 'exceptions\PHPException' with message 'Invalid argument supplied for foreach()' in /var/www/projetos/LGFramework/core/Setup.php:37
+Stack trace:
+#0 /var/www/projetos/LGFramework/system/erros.php(13): exceptions\PHPException::throwError(2, 'Invalid argumen...', '/var/www/projet...', 37)
+#1 [internal function]: handleError(2, 'Invalid argumen...', '/var/www/projet...', 37, Array)
+#2 /var/www/projetos/LGFramework/lib/smarty/Smarty.class.php(1421): call_user_func('handleError', 2, 'Invalid argumen...', '/var/www/projet...', 37, Array)
+#3 /var/www/projetos/LGFramework/core/Setup.php(37): Smarty::mutingErrorHandler(2, 'Invalid argumen...', '/var/www/projet...', 37, Array)
+#4 /var/www/projetos/ge/html/index.php(35): core\Setup->tratarAcao()
+#5 {main}
+  thrown37/var/www/projetos/LGFramework/core/Setup.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 26/02/2013 - 16:17:35 
+Erro [ 0 ]: /var/www/projetos/LGFramework/system/erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Uncaught exception 'exceptions\PHPException' with message 'Invalid argument supplied for foreach()' in /var/www/projetos/LGFramework/core/Setup.php:38
+Stack trace:
+#0 /var/www/projetos/LGFramework/system/erros.php(13): exceptions\PHPException::throwError(2, 'Invalid argumen...', '/var/www/projet...', 38)
+#1 [internal function]: handleError(2, 'Invalid argumen...', '/var/www/projet...', 38, Array)
+#2 /var/www/projetos/LGFramework/lib/smarty/Smarty.class.php(1421): call_user_func('handleError', 2, 'Invalid argumen...', '/var/www/projet...', 38, Array)
+#3 /var/www/projetos/LGFramework/core/Setup.php(38): Smarty::mutingErrorHandler(2, 'Invalid argumen...', '/var/www/projet...', 38, Array)
+#4 /var/www/projetos/ge/html/index.php(35): core\Setup->tratarAcao()
+#5 {main}
+  thrown38/var/www/projetos/LGFramework/core/Setup.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 26/02/2013 - 16:17:43 
+Erro [ 0 ]: /var/www/projetos/LGFramework/system/erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Uncaught exception 'exceptions\PHPException' with message 'Invalid argument supplied for foreach()' in /var/www/projetos/LGFramework/core/Setup.php:38
+Stack trace:
+#0 /var/www/projetos/LGFramework/system/erros.php(13): exceptions\PHPException::throwError(2, 'Invalid argumen...', '/var/www/projet...', 38)
+#1 [internal function]: handleError(2, 'Invalid argumen...', '/var/www/projet...', 38, Array)
+#2 /var/www/projetos/LGFramework/lib/smarty/Smarty.class.php(1421): call_user_func('handleError', 2, 'Invalid argumen...', '/var/www/projet...', 38, Array)
+#3 /var/www/projetos/LGFramework/core/Setup.php(38): Smarty::mutingErrorHandler(2, 'Invalid argumen...', '/var/www/projet...', 38, Array)
+#4 /var/www/projetos/ge/html/index.php(35): core\Setup->tratarAcao()
+#5 {main}
+  thrown38/var/www/projetos/LGFramework/core/Setup.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+

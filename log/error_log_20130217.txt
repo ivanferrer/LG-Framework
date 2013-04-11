@@ -1,0 +1,174 @@
+/************************************************** 
+ * Arquivo de log 
+ * 
+ * Data Criação: 17/02/2013 00:27 
+ *************************************************/ 
+——————————————————————- 
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 17/02/2013 - 00:27:00 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Constant DEBUG_LIGADO already defined31C:\xampp\LGFramework\system\config.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 17/02/2013 - 00:27:15 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Constant DEBUG_LIGADO already defined31C:\xampp\LGFramework\system\config.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 17/02/2013 - 00:27:15 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Constant DEBUG_LIGADO already defined31C:\xampp\LGFramework\system\config.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 17/02/2013 - 00:27:17 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Constant DEBUG_LIGADO already defined31C:\xampp\LGFramework\system\config.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 17/02/2013 - 00:31:53 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Constant DEBUG_LIGADO already defined31C:\xampp\LGFramework\system\config.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 17/02/2013 - 00:31:53 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Constant DEBUG_LIGADO already defined31C:\xampp\LGFramework\system\config.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 17/02/2013 - 00:31:55 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Constant DEBUG_LIGADO already defined31C:\xampp\LGFramework\system\config.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 17/02/2013 - 00:31:55 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Constant DEBUG_LIGADO already defined31C:\xampp\LGFramework\system\config.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 17/02/2013 - 00:31:56 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Constant DEBUG_LIGADO already defined31C:\xampp\LGFramework\system\config.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 17/02/2013 - 00:31:56 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Constant DEBUG_LIGADO already defined31C:\xampp\LGFramework\system\config.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 17/02/2013 - 00:39:06 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Constant DEBUG_LIGADO already defined31C:\xampp\LGFramework\system\config.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 17/02/2013 - 00:39:06 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Constant DEBUG_LIGADO already defined31C:\xampp\LGFramework\system\config.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 17/02/2013 - 00:39:51 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Constant GOOGLE_ANALYTICS already defined30C:\xampp\LGFramework\system\config.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 17/02/2013 - 00:39:51 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Constant GOOGLE_ANALYTICS already defined30C:\xampp\LGFramework\system\config.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+

@@ -1,0 +1,653 @@
+/************************************************** 
+ * Arquivo de log 
+ * 
+ * Data Criação: 19/02/2013 03:59 
+ *************************************************/ 
+——————————————————————- 
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 03:59:44 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Call to undefined function core\transformMethod()15C:\xampp\LGFramework\core\Roteador.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 04:02:41 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Uncaught exception 'SmartyException' with message 'Unable to load template file '404.tpl'' in C:\xampp\LGFramework\lib\smarty\sysplugins\smarty_internal_templatebase.php:127
+Stack trace:
+#0 C:\xampp\LGFramework\lib\smarty\sysplugins\smarty_internal_templatebase.php(374): Smarty_Internal_TemplateBase->fetch('404.tpl', NULL, NULL, NULL, true)
+#1 C:\xampp\htdocs\site\index.php(29): Smarty_Internal_TemplateBase->display('404.tpl')
+#2 {main}
+  thrown127C:\xampp\LGFramework\lib\smarty\sysplugins\smarty_internal_templatebase.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 04:11:54 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Uncaught exception 'SmartyException' with message 'Unable to load template file '404.tpl'' in C:\xampp\LGFramework\lib\smarty\sysplugins\smarty_internal_templatebase.php:127
+Stack trace:
+#0 C:\xampp\LGFramework\lib\smarty\sysplugins\smarty_internal_templatebase.php(374): Smarty_Internal_TemplateBase->fetch('404.tpl', NULL, NULL, NULL, true)
+#1 C:\xampp\htdocs\site\index.php(29): Smarty_Internal_TemplateBase->display('404.tpl')
+#2 {main}
+  thrown127C:\xampp\LGFramework\lib\smarty\sysplugins\smarty_internal_templatebase.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 04:15:05 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Uncaught exception 'exceptions\PHPException' with message 'Use of undefined constant PHP_PATH - assumed 'PHP_PATH'' in C:\xampp\htdocs\site\index.php:23
+Stack trace:
+#0 C:\xampp\LGFramework\system\erros.php(13): exceptions\PHPException::throwError(8, 'Use of undefine...', 'C:\xampp\htdocs...', 23)
+#1 C:\xampp\htdocs\site\index.php(23): handleError(8, 'Use of undefine...', 'C:\xampp\htdocs...', 23, Array)
+#2 {main}
+  thrown23C:\xampp\htdocs\site\index.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 04:15:06 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'Usuario' not found28C:\xampp\LGFramework\core\Roteador.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 04:15:28 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Uncaught exception 'exceptions\PHPException' with message 'Use of undefined constant PHP_PATH - assumed 'PHP_PATH'' in C:\xampp\htdocs\site\index.php:23
+Stack trace:
+#0 C:\xampp\LGFramework\system\erros.php(13): exceptions\PHPException::throwError(8, 'Use of undefine...', 'C:\xampp\htdocs...', 23)
+#1 C:\xampp\htdocs\site\index.php(23): handleError(8, 'Use of undefine...', 'C:\xampp\htdocs...', 23, Array)
+#2 {main}
+  thrown23C:\xampp\htdocs\site\index.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 04:15:52 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Uncaught exception 'exceptions\PHPException' with message 'Use of undefined constant PHP_PATH - assumed 'PHP_PATH'' in C:\xampp\htdocs\site\index.php:23
+Stack trace:
+#0 C:\xampp\LGFramework\system\erros.php(13): exceptions\PHPException::throwError(8, 'Use of undefine...', 'C:\xampp\htdocs...', 23)
+#1 C:\xampp\htdocs\site\index.php(23): handleError(8, 'Use of undefine...', 'C:\xampp\htdocs...', 23, Array)
+#2 {main}
+  thrown23C:\xampp\htdocs\site\index.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 04:16:28 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'Usuario' not found28C:\xampp\LGFramework\core\Roteador.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 04:18:29 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'Usuario' not found28C:\xampp\LGFramework\core\Roteador.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 04:21:09 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'controller\Usuario' not found28C:\xampp\LGFramework\core\Roteador.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 04:25:37 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'htdocs\site\controller\Usuario' not found28C:\xampp\LGFramework\core\Roteador.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 04:26:04 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'htdocs\site\controller\Usuario' not found28C:\xampp\LGFramework\core\Roteador.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 04:26:05 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'htdocs\site\controller\Usuario' not found28C:\xampp\LGFramework\core\Roteador.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 04:26:29 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'controller\Usuario' not found28C:\xampp\LGFramework\core\Roteador.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 04:30:45 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'controller\Usuario' not found28C:\xampp\LGFramework\core\Roteador.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 04:32:22 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'controller\Usuario' not found28C:\xampp\LGFramework\core\Roteador.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 04:32:25 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'controller\Usuario' not found28C:\xampp\LGFramework\core\Roteador.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 04:34:17 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'htdocs\site\model\Usuario' not found8C:\xampp\htdocs\site\controller\Usuario.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 04:34:47 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'htdocs\site\model\Usuario' not found8C:\xampp\htdocs\site\controller\Usuario.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 04:34:48 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'htdocs\site\model\Usuario' not found8C:\xampp\htdocs\site\controller\Usuario.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 04:34:48 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'htdocs\site\model\Usuario' not found8C:\xampp\htdocs\site\controller\Usuario.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 04:35:15 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'Login' not found17C:\xampp\LGFramework\core\Pagina.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 04:36:34 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'Usuario' not found17C:\xampp\LGFramework\core\Pagina.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 04:36:52 
+Erro [ 8 ]: C:\xampp\LGFramework\core\ConnectionFactory.php linha ( 25 ) 
+Mensagem Usuário:Erro Geral 
+Mensagem Interna:Use of undefined constant DATABASE_USER - assumed 'DATABASE_USER' 
+Trace: 
+{
+0 C:\xampp\LGFramework\system\erros.php(13): exceptions\PHPException::throwError(8, 'Use of undefine...', 'C:\xampp\LGFram...', 25)
+
+1 C:\xampp\LGFramework\core\ConnectionFactory.php(25): handleError(8, 'Use of undefine...', 'C:\xampp\LGFram...', 25, Array)
+
+2 C:\xampp\LGFramework\core\ConnectionFactory.php(16): core\ConnectionFactory->__construct()
+
+3 C:\xampp\LGFramework\core\DAO.php(12): core\ConnectionFactory::getConnection()
+
+4 C:\xampp\LGFramework\core\Pagina.php(19): core\DAO->__construct()
+
+5 C:\xampp\htdocs\site\controller\Usuario.php(8): core\Pagina->__construct(Object(model\Usuario))
+
+6 C:\xampp\LGFramework\core\Roteador.php(28): controller\Usuario->__construct()
+
+7 C:\xampp\htdocs\site\index.php(10): core\Roteador->instanciarController()
+
+8 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 04:39:11 
+Erro [ 8 ]: C:\xampp\LGFramework\core\Pagina.php linha ( 22 ) 
+Mensagem Usuário:Erro Geral 
+Mensagem Interna:Use of undefined constant PHP_PATH - assumed 'PHP_PATH' 
+Trace: 
+{
+0 C:\xampp\LGFramework\system\erros.php(13): exceptions\PHPException::throwError(8, 'Use of undefine...', 'C:\xampp\LGFram...', 22)
+
+1 C:\xampp\LGFramework\core\Pagina.php(22): handleError(8, 'Use of undefine...', 'C:\xampp\LGFram...', 22, Array)
+
+2 C:\xampp\htdocs\site\controller\Usuario.php(8): core\Pagina->__construct(Object(model\Usuario))
+
+3 C:\xampp\LGFramework\core\Roteador.php(28): controller\Usuario->__construct()
+
+4 C:\xampp\htdocs\site\index.php(10): core\Roteador->instanciarController()
+
+5 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 04:42:56 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Call to undefined method controller\Usuario::verificarAcesso()44C:\xampp\LGFramework\core\Roteador.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 04:44:15 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'Login' not found17C:\xampp\LGFramework\core\Pagina.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 04:45:40 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Call to undefined method controller\Usuario::verificarAcesso()44C:\xampp\LGFramework\core\Roteador.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 04:46:05 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Call to undefined method controller\Usuario::verificarAcesso()44C:\xampp\LGFramework\core\Roteador.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 04:46:07 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Call to undefined method controller\Usuario::verificarAcesso()44C:\xampp\LGFramework\core\Roteador.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 23:00:25 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Call to undefined method controller\Usuario::verificarAcesso()44C:\xampp\LGFramework\core\Roteador.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 23:04:08 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Call to undefined method controller\Usuario::verificarAcesso()44C:\xampp\LGFramework\core\Roteador.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 23:06:00 
+Erro [ 2 ]: C:\xampp\LGFramework\core\Autenticador.php linha ( 29 ) 
+Mensagem Usuário:Erro Geral 
+Mensagem Interna:session_regenerate_id() [<a href='function.session-regenerate-id'>function.session-regenerate-id</a>]: Session object destruction failed 
+Trace: 
+{
+0 C:\xampp\LGFramework\system\erros.php(13): exceptions\PHPException::throwError(2, 'session_regener...', 'C:\xampp\LGFram...', 29)
+
+1 [internal function]: handleError(2, 'session_regener...', 'C:\xampp\LGFram...', 29, Array)
+
+2 C:\xampp\LGFramework\core\Autenticador.php(29): session_regenerate_id(true)
+
+3 C:\xampp\LGFramework\core\Autenticador.php(23): core\Autenticador->renovarSessao()
+
+4 C:\xampp\htdocs\site\controller\Login.php(8): core\Autenticador->__construct(Object(model\Usuario))
+
+5 C:\xampp\LGFramework\core\Pagina.php(17): controller\Login->__construct()
+
+6 C:\xampp\htdocs\site\controller\Usuario.php(8): core\Pagina->__construct(Object(model\Usuario))
+
+7 C:\xampp\LGFramework\core\Roteador.php(28): controller\Usuario->__construct()
+
+8 C:\xampp\htdocs\site\index.php(10): core\Roteador->instanciarController()
+
+9 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 23:23:11 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'controller\Usuario' not found28C:\xampp\LGFramework\core\Roteador.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 23:23:12 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'controller\Usuario' not found28C:\xampp\LGFramework\core\Roteador.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 23:23:13 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'controller\Usuario' not found28C:\xampp\LGFramework\core\Roteador.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 23:23:13 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'controller\Usuario' not found28C:\xampp\LGFramework\core\Roteador.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 23:23:13 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'controller\Usuario' not found28C:\xampp\LGFramework\core\Roteador.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 23:23:14 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'controller\Usuario' not found28C:\xampp\LGFramework\core\Roteador.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 23:23:14 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'controller\Usuario' not found28C:\xampp\LGFramework\core\Roteador.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 23:27:01 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:syntax error, unexpected ';', expecting T_VARIABLE8C:\xampp\LGFramework\core\Roteador.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 23:33:40 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'core\ReflectionMethod' not found64C:\xampp\LGFramework\core\Roteador.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 23:33:46 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'core\ReflectionMethod' not found64C:\xampp\LGFramework\core\Roteador.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 23:34:03 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Call to a member function metodo() on a non-object69C:\xampp\LGFramework\core\Roteador.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 23:35:40 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Call to private method core\Roteador::exibir() from context ''14C:\xampp\htdocs\site\index.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 23:38:46 
+Erro [ 0 ]: C:\xampp\LGFramework\system\erros.php linha ( 20 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Class 'core\Exception' not found46C:\xampp\LGFramework\core\Autenticador.php 
+Trace: 
+{
+0 [internal function]: handleShutdown()
+
+1 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 23:39:16 
+Erro [ 0 ]: C:\xampp\LGFramework\core\Autenticador.php linha ( 46 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Área Restrita. Login ou Senha inválidos 
+Trace: 
+{
+0 C:\xampp\LGFramework\core\Pagina.php(60): core\Autenticador->verificarAcesso('todos', Array)
+
+1 C:\xampp\LGFramework\core\Roteador.php(44): core\Pagina->verificarAcesso()
+
+2 C:\xampp\htdocs\site\index.php(11): core\Roteador->verificarAcesso()
+
+3 {main}} 
+——————————————————————- 
+
+Classe: exceptions\ExceptionHandler Usuario: 
+Hora: 19/02/2013 - 23:39:40 
+Erro [ 0 ]: C:\xampp\LGFramework\core\Autenticador.php linha ( 46 ) 
+Mensagem Usuário:Ocorreu um problema 
+Mensagem Interna:Área Restrita. Login ou Senha inválidos 
+Trace: 
+{
+0 C:\xampp\LGFramework\core\Pagina.php(60): core\Autenticador->verificarAcesso('todos', Array)
+
+1 C:\xampp\LGFramework\core\Roteador.php(44): core\Pagina->verificarAcesso()
+
+2 C:\xampp\htdocs\site\index.php(11): core\Roteador->verificarAcesso()
+
+3 {main}} 
+——————————————————————- 
+
