@@ -1,7 +1,7 @@
 LG-Framework
 ============
 
-Para utilizar este APP com o LG Framework, é necessário realizar alguns passos iniciais. Vamos começar?
+Para utilizar este APP com o LG Framework, ï¿½ necessï¿½rio realizar alguns passos iniciais. Vamos comeï¿½ar?
 
 Passo 1 - Start
 ---------------
@@ -9,24 +9,25 @@ Passo 1 - Start
 Os arquivos a seguir devem ser editados conforme indicado:
 
 #### `.htaccess`
-Na linha que define o "RewriteBase", indique a raiz do APP (ex: se for www.dominio.com.br/pasta/, a raiz será "/pasta/". Se não houver, deixe apenas "/")
+Na linha que define o "RewriteBase", indique a raiz do APP (ex: se for www.dominio.com.br/pasta/, a raiz serï¿½ "/pasta/". Se nï¿½o houver, deixe apenas "/")
 
 #### `config/config_smarty.conf`
 Na linha que define a "pasta_raiz", indique o mesmo valor do "RewriteBase" do ".htaccess"
 
 #### `config/config.php`
-Neste arquivo você tem uma série de opções sobre o funcionamento do Framework. Sinta-se a vontade para brincar ;]
+Neste arquivo vocï¿½ tem uma sï¿½rie de opï¿½ï¿½es sobre o funcionamento do Framework. Sinta-se a vontade para brincar ;]
 
 #### `config/database.php`
-Neste arquivo você indica os dados de acesso do seu banco de dados, para ambientes de produção e teste. Você também pode editar a forma como o sistema identifica produção ou teste no arquivo config.php
+Neste arquivo vocï¿½ indica os dados de acesso do seu banco de dados, para ambientes de produï¿½ï¿½o e teste. Vocï¿½ tambï¿½m pode editar a forma como o sistema identifica produï¿½ï¿½o ou teste no arquivo config.php
 
 Passo 2 - Criando Classes
 -------------------------
 
 #### `Modelos e DAOs`
-Estes podem ser gerados automaticamente pela página de "setup" do LG Framework. Basta acessar www.dominio.com/setup (esta opção deve estar habilitada no config.php) 
-Modelos não devem ter sua estrutura alterada, mas você pode alterar os Gets and Setters para lançarem exceptions em situações não previstas pelo LGF. 
-Já os DAOs tem as funcionalidades básicas de um CRUD, para efetuar querys personalizadas, crie seus próprios métodos dentro dos seus DAOs.
+Estes podem ser gerados automaticamente pela pï¿½gina de "setup" do LG Framework. Basta acessar www.dominio.com/setup (esta opï¿½ï¿½o deve estar habilitada no config.php) 
+Modelos nï¿½o devem ter sua estrutura alterada, mas vocï¿½ pode alterar os Gets and Setters para lanï¿½arem exceptions em situaï¿½ï¿½es nï¿½o previstas pelo LGF. 
+Jï¿½ os DAOs tem as funcionalidades bï¿½sicas de um CRUD, para efetuar querys personalizadas, crie seus prï¿½prios mï¿½todos dentro dos seus DAOs.
 
 #### `Views e Controllers`
-Nas classes de exemplo dentro das pastas, você verá um comentário no início que explica o que é necessário e como funcionam as Views e os Controllers
+Nas classes de exemplo dentro das pastas, vocï¿½ verï¿½ um comentï¿½rio no inï¿½cio que explica o que ï¿½ necessï¿½rio e como funcionam as Views e os Controllers
+
