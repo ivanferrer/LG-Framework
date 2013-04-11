@@ -12,9 +12,7 @@ abstract class Pagina {
 	protected $template;
 	protected $alertaMensagem;
 	protected $alertaClasse;
-	
-	abstract public function index(); // força a declaração de uma função "index()" na View
-	
+		
 	public function __construct() {
 		$this->metodosAutenticados = array();
 		$this->metodosNaoAutenticados = array();
