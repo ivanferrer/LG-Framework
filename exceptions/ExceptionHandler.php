@@ -67,8 +67,9 @@ class ExceptionHandler{
 			$trace = $this->exception->getTraceAsString();
 			$trace = explode("#", $trace);
 			$trace = implode("\r\n", $trace);
+			$usuario = ($_SESSION['logado']) ? $_SESSION['LGF']['identidade'] : "não está logado";
 			//Arquivo
-			$msg .= "Classe: ".__CLASS__." Usuario: "."\r\n".//.$_SESSION['usr_id']."\r\n".
+			$msg .= "Classe: ".__CLASS__." Usuario ID: $usuario"." Request: ".$_SERVER['REQUEST_URI']."\r\n".
 					"Hora: ".date("d/m/Y - H:i:s") . " " ."\r\n".
 					"Erro [ {$this->exception->getCode()} ]: ".$this->exception->getFile()." linha ( {$this->exception->getLine()} ) " ."\r\n".
 					"Mensagem Usuário:{$this->getMensagem()} " ."\r\n".

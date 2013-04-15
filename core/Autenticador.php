@@ -22,7 +22,12 @@ abstract class Autenticador{
 		$this->ip = getenv("REMOTE_ADDR");
 		$this->time = date("Y-m-d H:i:s");
 		$this->sessionId = session_id();
-		if(isset($_SESSION['logado'])){ $this->logado = true; }else{ $this->logado = false; };
+		if(isset($_SESSION['logado']) && $_SESSION['logado'] == true){
+		    $this->logado = true;
+		}else{
+		    $this->logado = false;
+		    $_SESSION['logado'] = false;
+		};
 		//$this->renovarSessao();
 	}
 
@@ -69,6 +74,8 @@ abstract class Autenticador{
 			$this->verificarDados();
 			$this->setDadosSessao();
 			$_SESSION['logado'] = true;
+			$getter = "get".str_replace(" ","",ucwords(str_replace("_"," ",$this->identidade->getPrimaryKey())));
+			$_SESSION['LGF']['identidade'] = $this->identidade->$getter();
 			if(isset($_SESSION['url'])){
 				header("Location: ".$_SESSION['url']);
 			}else{

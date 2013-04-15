@@ -164,7 +164,10 @@ class QueryBuilder extends ConnectionFactory {
     }
 
     public function setCamposValores(array $campos,array $valores = null) {
+        $this->campos = array();
         $this->campos = $campos;
+        $this->valores = array();
+        $this->valores = $valores;
     }
     
     public function issetCampos(){

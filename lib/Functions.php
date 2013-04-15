@@ -2,6 +2,40 @@
 namespace lib;
 class Functions{
 	
+	public static function getTableFromList(\SplObjectStorage $lista, array $exibir = null){
+	    $lista->rewind();
+	    $objetoEx = $lista->current();
+	    $lista->rewind();
+	    $_ref = new \ReflectionClass(get_class($objetoEx));
+	    $_ret = $_ref->getProperties();
+        foreach($lista as $valor){
+            foreach($_ret as $_attributo){
+                if(in_array($_attributo->name,$exibir)){
+	                $call = 'get'.str_replace(" ","",ucwords(str_replace("_"," ",$_attributo->name)));
+    	            $_array_temp[$_attributo->name] = $valor->$call();
+	            }
+	        }
+            $_array[] = $_array_temp;
+	    }
+	    $_return = "<table class='sortable' id='".strtolower(get_class($objetoEx))."'><thead><tr>";
+	    foreach($_array[0] as $nome => $campo){
+	        $nomeE = ucwords(str_replace("_"," ",strstr($nome,"_")));
+	        $_return.= "<th>".$nomeE."</th>";
+	    }
+        $_return.= "</tr>";
+        $_return.= "</thead>";
+        $_return.= "<tbody>";
+	    foreach($_array as $campo){
+	        $_return.= "<tr>";
+	        foreach($campo as $nome => $valor){
+	            $_return.="<td>".$valor."</td>";
+	        }
+	        $_return.= "</tr>";
+	    }
+        $_return.= "</tbody>";
+	    $_return.= "<table>";
+	    return $_return;
+	}
 	public static function setObjectFromArray($object,$array){
 		foreach($array as $k => $v){
 			$str = str_replace("_"," ",$k);
@@ -72,16 +106,22 @@ class Functions{
 
     }
     
-	public static function sendMail($corpo ,$assunto ,array $destinatarios ,$CC = array(),$CCO = array(),$remetente = null,$anexo = null){
-		$mail = new PHPMailer(true);
+	public static function sendMail($corpo ,$assunto ,array $destinatarios ,$CC = array(),$CCO = array(),$remetente = null,$remetenteNome = null,$anexo = null){
+	    include_once(LGF_PATH.DS."lib".DS."PHPMailer.php");
+		$mail = new \PHPMailer(true);
+		$mail->IsSMTP(); // enable SMTP
+		$mail->IsHTML();
 		$mail->SMTPDebug = 0;
-		$mail->setFrom(MAIL_FROM);
+		$mail->SMTPAuth = true;  // authentication enabled
+		//$mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for GMail
+		$mail->Username = MAIL_USER;
+		$mail->Password = MAIL_PASS;
 		$mail->Host = MAIL_SMTP_HOST;
 		$mail->Port = MAIL_SMTP_PORT;
 		if(is_null($remetente)){
 			$mail->setFrom(MAIL_FROM,MAIL_FROM_NAME);
 		}else{
-			$mail->setFrom($remetente);
+			$mail->setFrom($remetente,$remetenteNome);
 		}
 		if(!is_null($anexo)){
 			$mail->AddAttachment($anexo);
