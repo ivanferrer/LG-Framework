@@ -2,40 +2,6 @@
 namespace lib;
 class Functions{
 	
-	public static function getTableFromList(\SplObjectStorage $lista, array $exibir = null){
-	    $lista->rewind();
-	    $objetoEx = $lista->current();
-	    $lista->rewind();
-	    $_ref = new \ReflectionClass(get_class($objetoEx));
-	    $_ret = $_ref->getProperties();
-        foreach($lista as $valor){
-            foreach($_ret as $_attributo){
-                if(in_array($_attributo->name,$exibir)){
-	                $call = 'get'.str_replace(" ","",ucwords(str_replace("_"," ",$_attributo->name)));
-    	            $_array_temp[$_attributo->name] = $valor->$call();
-	            }
-	        }
-            $_array[] = $_array_temp;
-	    }
-	    $_return = "<table class='sortable' id='".strtolower(get_class($objetoEx))."'><thead><tr>";
-	    foreach($_array[0] as $nome => $campo){
-	        $nomeE = ucwords(str_replace("_"," ",strstr($nome,"_")));
-	        $_return.= "<th>".$nomeE."</th>";
-	    }
-        $_return.= "</tr>";
-        $_return.= "</thead>";
-        $_return.= "<tbody>";
-	    foreach($_array as $campo){
-	        $_return.= "<tr>";
-	        foreach($campo as $nome => $valor){
-	            $_return.="<td>".$valor."</td>";
-	        }
-	        $_return.= "</tr>";
-	    }
-        $_return.= "</tbody>";
-	    $_return.= "<table>";
-	    return $_return;
-	}
 	public static function setObjectFromArray($object,$array){
 		foreach($array as $k => $v){
 			$str = str_replace("_"," ",$k);
@@ -229,6 +195,20 @@ class Functions{
 		} else {
 			return true;
 		}
+	}
+	
+	public static function formatarDocumento ($string){
+	    $output = preg_replace("[' '-./ t]", '', $string);
+	    $size = (strlen($output) -2);
+    	if ($size != 9 && $size != 12) return false;
+    	$mask = ($size == 9) 
+    		? '###.###.###-##' 
+    		: '##.###.###/####-##'; 
+    	$index = -1;
+    	for ($i=0; $i < strlen($mask); $i++):
+    		if ($mask[$i]=='#') $mask[$i] = $output[++$index];
+    	endfor;
+    	return $mask;
 	}
 	
 	public static function toJson(array $array){

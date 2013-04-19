@@ -10,9 +10,7 @@ abstract class Pagina {
 	protected $smarty;
 	protected $generalContent;
 	protected $template;
-	protected $alertaMensagem;
-	protected $alertaClasse;
-		
+			
 	public function __construct() {
 		$this->metodosAutenticados = array();
 		$this->metodosNaoAutenticados = array();
@@ -20,6 +18,7 @@ abstract class Pagina {
 		$this->autenticacao = new $_classLogin();
 		unset($_classLogin);
 		$this->smarty = new Smarty();
+		$this->associarDados('LGF_alerta',$_SESSION['LGF_alerta']);
 		$this->generalContent = '';
 		$this->template = TEMPLATE_PADRAO;
 	}
@@ -61,13 +60,6 @@ abstract class Pagina {
 	public function exibir() {
 		$this->associarDados("generalContent", $this->getGeneralContent());
 		$this->smarty->display($this->template);
-	}
-	
-	public function setAlerta($mensagem,$classe){
-		$this->alertaMensagem = $mensagem;
-		$this->alertaClasse = $classe;
-		$this->associarDados('LGF_alertaMensagem',$mensagem);
-		$this->associarDados('LGF_alertaClasse',$classe);
 	}
 	
 

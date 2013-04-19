@@ -18,7 +18,10 @@ class ExceptionHandler{
 		}
 		$_ExHandler = new ExceptionHandler($e,$codigo);
 		$_ExHandler->registraLog();
-		return $_ExHandler->getMensagem()."<p><div class='text-left'>".$_ExHandler->trace."</div></p>";
+		if (extension_loaded('newrelic')){
+		    newrelic_notice_error($_ExHandler->getMensagem(),$e);
+		}
+		return $_ExHandler->getMensagem();
 	}
 	
 	private function debug(){
@@ -36,7 +39,7 @@ class ExceptionHandler{
 			case 1 : return "Erro de SQL";
 			case 1002 : return "Ocorreu um erro no site. Entre em contato com o suporte.";
 			case 404 : return "Página Não Encontrada";
-			case 23000:	return "Não foi possível gravar os dados. Tente novamente.";
+			case 1062:	return "Registro já existe.";
 			default: return "Erro Não Identificado, código: ".$this->codigoErro;
 		}	
 	}

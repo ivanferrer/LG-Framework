@@ -72,14 +72,19 @@ abstract class DAO extends ConnectionFactory{
 	}
 	
 	public function getId(Modelo $obj,$id){
-		$this->startTransaction();
-		
-    	    $this->QueryBuilder->addWhereEquals($obj->getPrimaryKey(), $id);
-    	    $result = $this->con->query($this->QueryBuilder->getQuery($obj, "SELECT"));
-    	    $result->setFetchMode(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE, get_class($obj));
-    	    
-		$this->encerrarQuery();
-	    return $result->fetch();
+	    try{
+    		$this->startTransaction();
+    		
+        	    $this->QueryBuilder->addWhereEquals($obj->getPrimaryKey(), $id);
+        	    $result = $this->con->query($this->QueryBuilder->getQuery($obj, "SELECT"));
+        	    $result->setFetchMode(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE, get_class($obj));
+        	    
+    		$this->encerrarQuery();
+    		$obj = $result->fetch();
+    		return $obj;
+	    }catch(\PDOException $e){
+	        throw new e\DaoException($e->errorInfo[2],$e->errorInfo[1],$e);
+	    }
 	}
 	
 	/**
@@ -88,19 +93,23 @@ abstract class DAO extends ConnectionFactory{
 	 * @throws \PDOException
 	 */
 	public function select(Modelo $obj){
-		$this->startTransaction();
-		
-    		$list = new \SplObjectStorage();
-    		$result = $this->con->query($this->QueryBuilder->getQuery($obj, "SELECT"));
-    		$classe = strtolower(get_class($obj));
-    		while($row = $result->fetch(\PDO::FETCH_ASSOC)){
-    			$obj = new $classe();
-    			$obj = l\Functions::setObjectFromArray($obj, $row);
-    			$list->attach($obj);
-    		}
-		
-		$this->encerrarQuery();
-		return $list;
+	    try{
+    		$this->startTransaction();
+    		
+        		$list = new \SplObjectStorage();
+        		$result = $this->con->query($this->QueryBuilder->getQuery($obj, "SELECT"));
+        		$classe = strtolower(get_class($obj));
+        		while($row = $result->fetch(\PDO::FETCH_ASSOC)){
+        			$obj = new $classe();
+        			$obj = l\Functions::setObjectFromArray($obj, $row);
+        			$list->attach($obj);
+        		}
+    		
+    		$this->encerrarQuery();
+    		return $list;
+	    }catch(\PDOException $e){
+	        throw new e\DaoException($e->errorInfo[2],$e->errorInfo[1],$e);
+	    }
 	}
 	
 	/**
@@ -109,41 +118,54 @@ abstract class DAO extends ConnectionFactory{
 	 * @throws PDOException
 	 */
 	public function insert(Modelo $obj){
-		$this->startTransaction();
-		
-    		$this->setParams($obj);
-    		$this->prepareStatement($obj,"INSERT");
-    		$this->bindParams();
-    		$erro = $this->statement->execute();
-    		$this->statement->errorInfo();
-    		$obj->setIncrementId($this->con->lastInsertId());
-		
-		$this->encerrarQuery();
+	    try{
+    		$this->startTransaction();
+    		
+        		$this->setParams($obj);
+        		$this->prepareStatement($obj,"INSERT");
+        		$this->bindParams();
+        		$erro = $this->statement->execute();
+        		$this->statement->errorInfo();
+        		$obj->setIncrementId($this->con->lastInsertId());
+    		
+    		$this->encerrarQuery();
+	    }catch(\PDOException $e){
+	        throw new e\DaoException($e->errorInfo[2],$e->errorInfo[1],$e);
+	    }
 	}
 	
 	public function update(Modelo $obj){
-		$this->startTransaction();
-		
-    		$this->setParams($obj,true);
-    		$call = 'get'.str_replace(" ","",ucwords(str_replace("_"," ", $obj->getPrimaryKey())));
-    		$id = $obj->$call();
-    	    $this->QueryBuilder->addWhereEquals($obj->getPrimaryKey(), $id);
-    		$this->prepareStatement($obj,"UPDATE");
-    		$this->bindParams();
-    		$erro = $this->statement->execute();
-    		$this->statement->errorInfo();	    
-		
-		$this->encerrarQuery();
+	    try{
+    		$this->startTransaction();
+    		
+        		$this->setParams($obj,true);
+        		$call = 'get'.str_replace(" ","",ucwords(str_replace("_"," ", $obj->getPrimaryKey())));
+        		$id = $obj->$call();
+        	    $this->QueryBuilder->addWhereEquals($obj->getPrimaryKey(), $id);
+        		$this->prepareStatement($obj,"UPDATE");
+        		$this->bindParams();
+        		$erro = $this->statement->execute();
+        		$this->statement->errorInfo();	    
+    		
+    		$this->encerrarQuery();
+	    }catch(\PDOException $e){
+	        throw new e\DaoException($e->errorInfo[2],$e->errorInfo[1],$e);
+	    }
 	}
 	
 
 	protected function query($sql){
-		$this->startTransaction();
-		$result = $this->con->query($sql);
-		while($row = $result->fetch(\PDO::FETCH_ASSOC)){
-			$return[] = $row;
-		}
-		return $return;
+	    try{
+    	    $return = array();
+    		$this->startTransaction();
+    		$result = $this->con->query($sql);
+    		while($row = $result->fetch(\PDO::FETCH_ASSOC)){
+    			$return[] = $row;
+    		}
+    		return $return;
+	    }catch(\PDOException $e){
+	        throw new e\DaoException($e->errorInfo[2],$e->errorInfo[1],$e);
+	    }
 	}
 	
 	/**

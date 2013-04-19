@@ -45,6 +45,19 @@ class Table {
         }
     }
     
+    public function setArray(array $lista,$idDiv){
+        $this->id = $idDiv;
+        foreach($lista as $linha => $coluna){
+            foreach($coluna as $campo => $valor){
+                $this->valores[$linha][$campo] = $valor;
+                if($linha == 0){
+                    $this->campos[$campo] = $campo;
+                }
+            }
+        }
+        
+    }
+    
     public function getHTML(){
         $_return = "<table class='sortable' id='".$this->id."'><thead><tr>";
         foreach($this->campos as $nome){
@@ -52,7 +65,6 @@ class Table {
                 if(array_key_exists($nome, $this->camposExibir)){
                     $label = $this->camposExibir[$nome];
                 }else{
-                    
                     $label = (strstr($nome,"_")) ? ucwords(str_replace("_"," ",strstr($nome,"_"))) : $nome;
                 }
                 $_return.= "<th>".$label."</th>";

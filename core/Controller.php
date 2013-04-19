@@ -7,11 +7,7 @@ abstract class Controller {
 	private $metodosNaoAutenticados;
 	protected $generalContent;
 	protected $template;
-	protected $alertaMensagem;
-	protected $alertaClasse;
-	
-	abstract public function index();
-	
+		
 	public function __construct() {
 		$this->metodosAutenticados = array();
 		$this->metodosNaoAutenticados = array();
@@ -33,34 +29,39 @@ abstract class Controller {
 	
 	public function inserir(){
 	    try{
+    	    $call = '\dao\\'.Globals::getClasse();
+    	    $dao = new $call();
+    	    
+    	    Globals::setAlertTipo("alert");
     	    $call = '\model\\'.Globals::getClasse();
     	    $modelo = new $call();
     	    l\Functions::setObjectFromArray($modelo, $_POST);
     	    
-    	    $call = '\dao\\'.Globals::getClasse();
-    	    $dao = new $call();
     	    $dao->insert($modelo);
-	        $this->setAlerta("Cadastro Realizado com sucesso!",'success');
+    	    Globals::setAlertTipo("success");
+    	    Globals::setAlertMensagem("Cadastro Realizado com sucesso!");
 	        $dao->commit();
 	    }catch(e\ModeloException $e){
-	        $this->setAlerta($e->getMessage(),'alert');
+	        Globals::setAlertMensagem($e->getMessage());
 	        $dao->rollBack();
+	        echo"oi";
 	    }catch(\PDOException $e){
-	        $this->setAlerta($e->getMessage(),'alert');
+	        Globals::setAlertMensagem($e->getMessage());
 	        $dao->rollBack();
 	    }catch(\Exception $e){
-	        $this->setAlerta($e->getMessage(),'alert');
+	        Globals::setAlertMensagem($e->getMessage());
 	        $dao->rollBack();
 	    }
     	$anterior = Globals::getAnterior();
 	    header("Location: ".HTTP_PATH.$anterior['urlChamada'],true,307);
 	}
 	
+	/*
 	public function setAlerta($mensagem,$classe){
 		$this->alertaMensagem = $mensagem;
 		$this->alertaClasse = $classe;
 		$_SESSION['LGF_alerta']['mensagem'] = $mensagem;
 		$_SESSION['LGF_alerta']['classe'] = $classe;
-	}
+	}*/
 
 }

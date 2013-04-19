@@ -44,9 +44,13 @@ class Roteador{
 		}
 		$this->classe = ($actions[0] != '') ? $actions[0] : VIEW_PADRAO;
 		$this->urlFinal .= $this->classe;
-		$this->classe = $this->transformarParametrosURL($this->classe,true);
 		$this->metodo = (isset($actions[1]) && $actions[1] != '') ? $actions[1] : METODO_PADRAO;
 		$this->urlFinal .= "/".$this->metodo;
+		if (extension_loaded ('newrelic')) {
+		    newrelic_name_transaction ($this->urlFinal);
+		}
+
+		$this->classe = $this->transformarParametrosURL($this->classe,true);
 		$this->metodo = $this->transformarParametrosURL($this->metodo);
 		if(count($actions)>2){
 			for($i=0;$i<count($actions)-2;$i++){
@@ -68,8 +72,8 @@ class Roteador{
 	
 	public function registrarSession(){
     		if(isset($_SESSION['LGF_alerta'])){
-    			$this->obj->setAlerta($_SESSION['LGF_alerta']['mensagem'],$_SESSION['LGF_alerta']['classe']);
-    			unset($_SESSION['LGF_alerta']);
+    			//Globals::setAlertaTipo($_SESSION['LGF_alerta']['mensagem'],$_SESSION['LGF_alerta']['classe']);
+    			//unset($_SESSION['LGF_alerta']);
     		}
     		if(isset($_SESSION['anterior'])){
     		    if($_SESSION['tipo'] == 'view'){
@@ -104,15 +108,11 @@ class Roteador{
 					$_classLogin = CONTROLLER_LOGIN;
 					$login = new $_classLogin();
 					$login->verificarPermissao($this->obj);
-					unset($_classLogin);
-					unset($login);
 				}else{
 					if($this->metodo != METODO_LOGIN){
 						$_classLogin = CONTROLLER_LOGIN;
 						$login = new $_classLogin();
 						$login->verificarPermissao($this->obj);
-						unset($_classLogin);
-						unset($login);
 					}
 				}
 			}
@@ -158,6 +158,8 @@ class Roteador{
 		if($this->tipo != 'controller'){
 			$this->obj->exibir();
 		}
+        $_SESSION['LGF_alerta']['mensagem'] = Globals::getAlertMensagem();
+        $_SESSION['LGF_alerta']['classe'] = Globals::getAlertTipo();
 	}
 	
 }
