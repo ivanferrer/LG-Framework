@@ -70,7 +70,7 @@ class ExceptionHandler{
 			$trace = $this->exception->getTraceAsString();
 			$trace = explode("#", $trace);
 			$trace = implode("\r\n", $trace);
-			$usuario = ($_SESSION['logado']) ? $_SESSION['LGF']['identidade'] : "não está logado";
+			$usuario = ($_SESSION['LGF']['logado']) ? $_SESSION['LGF']['identidade'] : "não está logado";
 			//Arquivo
 			$msg .= "Classe: ".__CLASS__." Usuario ID: $usuario"." Request: ".$_SERVER['REQUEST_URI']."\r\n".
 					"Hora: ".date("d/m/Y - H:i:s") . " " ."\r\n".

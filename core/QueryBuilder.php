@@ -10,6 +10,7 @@ class QueryBuilder extends ConnectionFactory {
     private $valores;
     private $join;
     private $query;
+    private $parametroWhere;
     private $tabela;
     private $order;
     private $orderOrientacao;
@@ -21,29 +22,32 @@ class QueryBuilder extends ConnectionFactory {
         $this->campos = array();
         $this->valores = array();
         $this->query = array();
+        $this->parametroWhere = array();
         $this->tabela = array();
         $this->order = array();
         $this->orderOrientacao = null;
         $this->group = array();
+        $this->con = $this->getConnection();
     }
 
     public function addWhereEquals($campo, $valor) {
         if ($valor != "") {
-            $valor = (is_string($valor)) ? "'".$valor."'" : $valor;
-            $this->query[] = "$campo = $valor";
+            $this->query[] = "$campo = :where_eq_$campo";
+            $this->parametroWhere[':where_eq_'.$campo] = $valor;
         }
     }
 
     public function addWhereDifferent($campo, $valor) {
         if ($valor != "") {
-            $valor = (is_string($valor)) ? "'".$valor."'" : $valor;
-            $this->query[] = "$campo != $valor";
+            $this->query[] = "$campo != :where_df_$campo";
+            $this->parametroWhere[':where_df_'.$campo] = $valor;
         }
     }
 
     public function addWhereLike($campo, $valor) {
         if ($valor != "") {
-            $this->query[] = "$campo LIKE '%$valor%'";
+            $this->query[] = "$campo LIKE '%:where_lk_$campo%'";
+            $this->parametroWhere[':where_lk_'.$campo] = $valor;
         }
     }
 
@@ -53,7 +57,8 @@ class QueryBuilder extends ConnectionFactory {
                 $value = (is_string($value)) ? "'".$value."'" : $value;
             }
             $valor = implode(",", $valor);
-            $this->query[] = "$campo in('$valor')";
+            $this->query[] = "$campo in(':where_in_$campo')";
+            $this->parametroWhere[':where_in_'.$campo] = $valor;
         }
     }
 
@@ -63,12 +68,16 @@ class QueryBuilder extends ConnectionFactory {
                 $value = (is_string($value)) ? "'".$value."'" : $value;
             }
             $valor = implode(",", $valor);
-            $this->query[] = "$campo not in('$valor')";
+            $this->query[] = "$campo not in(':where_$valor')";
+            $this->parametroWhere[':where_'.$campo] = $valor;
         }
     }
 
     public function addWhereBetween($campo, $start, $end) {
-        $this->query[] = "$campo between '" . $start . "' AND '" . $end . "'";
+        
+        $this->query[] = "$campo between ':" . $campo . "_start' AND ':".$campo."_end'";
+        $this->parametroWhere[$campo.'_start'] = $start;
+        $this->parametroWhere[$campo.'_end'] = $end;
     }
 
     public function addWhereCustom($customWhere) {
@@ -132,7 +141,8 @@ class QueryBuilder extends ConnectionFactory {
         return $query;
     }
 
-    private function gerarOperacao() {
+    public function getParametroWhere() {
+        return $this->parametroWhere;
     }
 
     private function iniciarQuery() {

@@ -22,11 +22,11 @@ abstract class Autenticador{
 		$this->ip = getenv("REMOTE_ADDR");
 		$this->time = date("Y-m-d H:i:s");
 		$this->sessionId = session_id();
-		if(isset($_SESSION['logado']) && $_SESSION['logado'] == true){
+		if(isset($_SESSION['LGF']['logado']) && $_SESSION['LGF']['logado'] == hash("sha256",APP_DIR.PROJETO_NOME)){
 		    $this->logado = true;
 		}else{
 		    $this->logado = false;
-		    $_SESSION['logado'] = false;
+		    $_SESSION['LGF']['logado'] = false;
 		};
 		//$this->renovarSessao();
 	}
@@ -47,15 +47,23 @@ abstract class Autenticador{
 	public function verificarPermissao($obj){
 		$metodosAutenticados = $obj->getMetodosAutenticados();
 		$metodosNaoAutenticados = $obj->getMetodosNaoAutenticados();
-		if($this->logado === false && !($_SESSION['classe'] == CONTROLLER_LOGIN && $_SESSION['metodo'] == METODO_LOGIN)){
-			$_SESSION['url'] = HTTP_FULL_PATH;
-			if(
-					(	$metodosAutenticados == 'todos'	||	array_search($_SESSION['metodo'],$metodosAutenticados) !== false	)
-					&&
-					(	$metodosNaoAutenticados != 'todos'	&&	array_search($_SESSION['metodo'],$metodosNaoAutenticados) === false	)
-			){
-				throw new e\PermissionException($this->mensagemLoginInvalido);
-			}
+		if(
+				(	$metodosAutenticados == 'todos'	||	array_search($_SESSION['metodo'],$metodosAutenticados) !== false	)
+				&&
+				(	$metodosNaoAutenticados != 'todos'	&&	array_search($_SESSION['metodo'],$metodosNaoAutenticados) === false	)
+		){
+    		if($this->logado === false && !($_SESSION['classe'] == CONTROLLER_LOGIN && $_SESSION['metodo'] == METODO_LOGIN)){
+    			    $_SESSION['LGF']['url'] = $_SERVER['REQUEST_URI'];
+    				throw new e\PermissionException($this->mensagemLoginInvalido);
+    		}else{
+    		    if(method_exists($this, 'permissaoDeAcesso')){
+    		        $resposta = $this->permissaoDeAcesso($this->identidade,$_SESSION['classe'],$_SESSION['metodo']);
+    		        if(!$resposta){
+        			    $_SESSION['LGF']['url'] = $_SERVER['REQUEST_URI'];
+        				throw new e\PermissionException("O seu perfil não tem acesso a esta página");
+    		        }
+    		    }
+    		}
 		}
 	}
 
@@ -73,11 +81,11 @@ abstract class Autenticador{
 		try{
 			$this->verificarDados();
 			$this->setDadosSessao();
-			$_SESSION['logado'] = true;
+			$_SESSION['LGF']['logado'] = hash("sha256",APP_DIR.PROJETO_NOME);
 			$getter = "get".str_replace(" ","",ucwords(str_replace("_"," ",$this->identidade->getPrimaryKey())));
 			$_SESSION['LGF']['identidade'] = $this->identidade->$getter();
-			if(isset($_SESSION['url'])){
-				header("Location: ".$_SESSION['url']);
+			if(isset($_SESSION['LGF']['url'])){
+				header("Location: ".$_SESSION['LGF']['url']);
 			}else{
 				header("Location: ".HTTP_FULL_PATH);
 			}
@@ -88,17 +96,6 @@ abstract class Autenticador{
 	
 	public function setMesagemLoginInvalido($mensagem){
 		$this->mensagemLoginInvalido = $mensagem;
-	}
-	
-	public function getLoginForm($labelLogin='Login',$labelSenha = 'Senha',$botao = 'Entrar'){
-		return "
-		<div id='div-login' class='login'>
-			<form id='form-login' class='login' name='login' action='".HTTP_PATH.$this->_classLogin."/autenticar' method='POST'>
-				<span id='span-login-login'><label>$labelLogin</label><input class='text' type='text' name='login'/></span>
-				<span id='span-login-password'><label>$labelSenha</label><input class='text' type='password' name='senha'/></span>
-				<span id='span-login-submit'><input class='botao' type='submit' value='$botao'/></span>
-			</form>
-		</div>";
 	}
 	
 }

@@ -23,6 +23,7 @@ function handleShutdown() {
         	$smarty->assign("mensagem",$mensagem);
         	$smarty->display('500.tpl');
 		}else{
+		    ///echo'shut';
 			//yourPrintOrMailFunction("SHUTDOWN");
 		}
 	}
