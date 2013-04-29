@@ -10,13 +10,13 @@
  *
 */
 class Paginacao {
-  public $limit;
-  public $proxima;
-	public $anterior;
-	public $NumeroPaginaAtual;
-	public $urlPagina;
-	public $urlSite;
-	public $limitListaPaginas;
+    public $limit;
+    public $proxima;
+    public $anterior;
+    public $NumeroPaginaAtual;
+    public $urlPagina;
+    public $urlSite;
+    public $limitListaPaginas;
 
 
     public function setLimitPorPagina($limit = null){
