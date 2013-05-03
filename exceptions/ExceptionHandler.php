@@ -13,7 +13,6 @@ class ExceptionHandler{
 	}
 	
 	public static function tratarErro(\Exception $e,$codigo = false){
-	    echo 'oi';
 		if($codigo === false){
 			$codigo = $e->getCode();
 		}
@@ -41,7 +40,7 @@ class ExceptionHandler{
 	private function getMensagem($codigoErro){
 	    $arquivo_erros_conf = APP_DIR.DS."config".DS."erros.conf";
 	    if(file_exists($arquivo_erros_conf)){
-	        if(file_get_contents('./people.txt', true))
+	        //if(file_get_contents('./people.txt', true))
 	    }
 		switch ($codigoErro){
 			case 0 : return "Ocorreu um problema na execução do Script.";
