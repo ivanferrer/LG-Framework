@@ -15,10 +15,13 @@ function handleError($a,$b,$c,$d){
 
 function handleShutdown() {
 	$error = error_get_last();
+	echo $error['message'];
 	if(strstr($error['file'],"autoload.php") === false){
 		if($error !== NULL){
 			$e = new e\PHPException(0, $error['message'],$error['file'],$error['line']);
+	    echo 'oi';
 			$mensagem =  e\ExceptionHandler::tratarErro($e);
+	    echo 'oi';
         	$smarty = new c\Smarty();
         	$smarty->assign("mensagem",$mensagem);
         	$smarty->display('500.tpl');

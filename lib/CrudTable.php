@@ -21,15 +21,28 @@ class CrudTable {
     private $camposExibir;
     private $id;
     private $idField;
+    private $inputLabel;
+    private $inputOff;
+    private $relacionamentos;
     
     
     public function __construct() {
         
     }
     
+    public function setInputLabel($campo,$label){
+        $this->inputLabel[$campo] = $label;
+    }
+    
+    public function setInputOff($campo){
+        $this->inputOff[] = $campo;
+    }
+    
+    
     public function setList(\SplObjectStorage $lista){
         $lista->rewind();
         $objetoEx = $lista->current();
+        $this->relacionamentos = $objetoEx->getChaveRelacionamentos();
         $nome = get_class($objetoEx);
         $this->id = str_replace("\\","_",$nome);
         $nome = explode('\\', $nome);
@@ -38,7 +51,7 @@ class CrudTable {
         $_ref = new \ReflectionClass(get_class($objetoEx));
         $_ret = $_ref->getProperties();
         foreach($lista as $linha => $valor){
-            $pk = $valor->getPrimaryKey();
+            $pk = $valor->getChavePrimaria();
             $pk = "get".str_replace(" ","",ucwords(str_replace("_"," ",$pk)));
             foreach($_ret as $key => $_attributo){
                 $call = 'get'.str_replace(" ","",ucwords(str_replace("_"," ",$_attributo->name)));
@@ -51,7 +64,7 @@ class CrudTable {
         }
         $lista->rewind();
         $obj = $lista->current();
-        $this->idField = $obj->getPrimaryKey();
+        $this->idField = $obj->getChavePrimaria();
     }
     
     public function setClasse($classe){
@@ -86,7 +99,7 @@ class CrudTable {
         $body = array();
         switch($action){
             case 'excluir':
-                $body[]= "Tem certeza que deseja excluir a revenda <span></span>?";
+                $body[]= "Tem certeza que deseja excluir este registro?";
                 foreach($this->campos as $key => $campo){
                     if($campo == $this->idField){
                         $body[] = "<input type='hidden' class='".$campo."' name='".$campo."' value=''/>";
@@ -97,8 +110,15 @@ class CrudTable {
             case 'inserir':
                 foreach($this->campos as $key => $campo){
                     if($campo != $this->idField || $action == 'alterar'){
+                        $label = null;
+                        foreach($this->inputLabel as $cmp => $lbl){
+                            if($campo == $cmp){
+                                $label = $lbl; 
+                            }
+                        }
+                        $label = (is_null($label)) ? ucwords(str_replace("_"," ",strstr($campo,"_"))) : $label;
                         $body[] = '<div class="control-group">';
-                        $body[] = '<label class="control-label" for="'.$campo.'" >'. ucwords(str_replace("_"," ",strstr($campo,"_")))."</label>";
+                        $body[] = '<label class="control-label" for="'.$campo.'" >'. $label."</label>";
                         $body[] = "<div class='controls'><input type='text' id='$campo' class='$campo' name='$campo' value=''/></div>";
                         $body[] = '</div>';
                     }
@@ -110,7 +130,7 @@ class CrudTable {
             <form class="form-horizontal" method="POST" action="'.HTTP_PATH."c/".$this->objetoNome."/".$action.'">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h3 id="myModalLabel3">'.ucfirst($action).' Revenda</h3>
+                    <h3 id="myModalLabel3">'.ucfirst($action).' '.$this->objetoNome.'</h3>
                 </div>
                 <div class="modal-body">
                   '.implode("\n",$body).'

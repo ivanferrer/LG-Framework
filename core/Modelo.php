@@ -10,7 +10,7 @@ abstract class Modelo{
 	
 	public function __construct($chavePrimaria, $tabelaDoModelo,array $chavesRelacionais = null,array $chavesUnicas = null){
 		$this->chavePrimaria = $chavePrimaria;
-		$this->valorChavePrimaria &= $this->$chavePrimaria;
+		$this->valorChavePrimaria =& $this->$chavePrimaria;
 		$this->tabelaDoModelo = $tabelaDoModelo;
 		$this->chavesRelacionais = $chavesRelacionais;
 		$this->chavesUnicas = $chavesUnicas;

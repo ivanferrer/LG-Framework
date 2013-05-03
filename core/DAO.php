@@ -18,6 +18,7 @@ abstract class DAO extends ConnectionFactory{
 	private $operacaoMultipla;
 	private $tipoOperacao;
 	private $paramsWhere;
+	private $finalQuery;
 	protected $QueryBuilder;
 	
 	public function __construct(){
@@ -37,6 +38,7 @@ abstract class DAO extends ConnectionFactory{
 		    }
 		    $this->paramsWhere = $this->QueryBuilder->getParametroWhere();
 		    $sql = $this->QueryBuilder->getQuery($obj, $this->tipoOperacao);
+		    $this->finalQuery = $sql;
 			$this->statement = $this->con->prepare($sql);
 		}
 	}
@@ -71,12 +73,16 @@ abstract class DAO extends ConnectionFactory{
 	
 	private function bindParams(){
 		if(count($this->paramsWhere) > 0){
-		    foreach($this->paramsWhere as $key => $value){
-		        $this->statement->bindValue($key,$value);
+		    foreach($this->paramsWhere as $key => &$value){
+		        $val = $this->statement->bindParam($key,$value);
+		        $this->finalQuery = str_replace($key,$value,$this->finalQuery);
 		    }
 		}
 		foreach($this->campos as $key => &$value){
-			$this->statement->bindValue($value, $this->valores[$key]);
+		    if($this->tipoOperacao != 'DELETE'){
+    	        $this->finalQuery = str_replace($key,$value,$this->finalQuery);
+    			$this->statement->bindValue($value, $this->valores[$key]);
+		    }
 		}
 	}
 	
@@ -140,7 +146,7 @@ abstract class DAO extends ConnectionFactory{
         		$this->prepareStatement($obj);
         		$this->bindParams();
         		$erro = $this->statement->execute();
-        		$obj->setIncrementId($this->con->lastInsertId());
+        		$obj->setValorChavePrimaria($this->con->lastInsertId());
     		
     		$this->encerrarQuery();
 	    }catch(\PDOException $e){
@@ -183,9 +189,12 @@ abstract class DAO extends ConnectionFactory{
         		$this->setParams($obj,true);
         		//$call = 'get'.str_replace(" ","",ucwords(str_replace("_"," ", $obj->getChavePrimaria())));
         		//$id = $obj->$call();
-        	    $this->QueryBuilder->addWhereEquals($obj->getChavePrimaria(), $obj->getValorChavePrimaria());
+        		$id = $obj->getValorChavePrimaria();
+        	    $this->QueryBuilder->addWhereEquals($obj->getChavePrimaria(), $id);
         		$this->prepareStatement($obj);
+        		echo $this->finalQuery;
         		$this->bindParams();
+        		echo $this->finalQuery;
         		$this->statement->execute();
     		
     		$this->encerrarQuery();

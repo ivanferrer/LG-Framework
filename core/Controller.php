@@ -44,7 +44,7 @@ abstract class Controller {
     	    
     	    $this->dao->insert($this->model);
 
-    	    $call = 'get'.str_replace(" ","",ucwords(str_replace("_"," ", $this->model->getPrimaryKey())));
+    	    $call = 'get'.str_replace(" ","",ucwords(str_replace("_"," ", $this->model->getChavePrimaria())));
     	    $json_resp['id'] = $this->model->$call();
     	    
     	    Globals::setAlertTipo("success");

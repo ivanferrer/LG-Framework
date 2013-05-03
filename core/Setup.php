@@ -136,7 +136,7 @@ class ".$this->classeFromTabela($tabela)." extends c\Modelo{
 			$modelo .='
 			$this->'.$linha['Field']." = ".$val.';';
 
-			if($linha['Key'] == 'MUL' || $linha['Key'] == 'UNI'){
+			if($linha['Key'] == 'PRI' || $linha['Key'] == 'MUL' || $linha['Key'] == 'UNI'){
 			    foreach($constraints as $cnst){
 			        if(strstr($cnst['CONSTRAINT_NAME'], $linha['Field'])){
 			            switch($cnst['CONSTRAINT_TYPE']){

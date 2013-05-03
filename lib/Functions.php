@@ -153,48 +153,34 @@ class Functions{
 	 * retorna true ou false
 	 */
 	public static function validaCNPJ($cnpj) {
-		$cnpj = str_replace('.','',$cnpj);
-		$cnpj = str_replace('/','',$cnpj);
-		$cnpj = str_replace('-','',$cnpj);
-	
-		//verifica se os digitos são iguais, por incrivel que parece quando é tudo 0 isso é válido!
-		$iguais = true;
-		for ($i=1; $i< strlen($cnpj); $i++){
-			if (subzstr($cnpj, $i, 1) != substr($cnpj, ($i-1), 1)) $iguais = false;
-		}
-		if ($iguais) return false;
-	
-		$a = array();
-		$b = 0;
-		$c = array(6,5,4,3,2,9,8,7,6,5,4,3,2);
-		$x = 0;
-		for($i=0; $i<12; $i++){
-			$a[$i] = substr($cnpj, $i, 1);
-			$b += $a[$i] * $c[$i+1];
-		}
-	
-		if (($x = $b % 11) < 2) {
-			$a[12] = 0;
-		} else {
-			$a[12] = 11 - $x;
-		}
-	
-		$b = 0;
-		$x = 0;
-		for($y=0; $y<13; $y++) {
-			$b += ($a[$y] * $c[$y]);
-		}
-		if (($x = $b % 11) < 2) {
-			$a[13] = 0;
-		} else {
-			$a[13] = 11-$x;
-		}
-	
-		if ((substr($cnpj, 12, 1) != $a[12]) || (substr($cnpj, 13, 1) != $a[13])){
-			return false;
-		} else {
-			return true;
-		}
+	    for($i = 0; $i <= 9; $i++) {
+	        $fake = str_pad("", 14, $i);
+	        if($cnpj == $fake)
+	            return false;
+	    }
+        if(strlen($cnpj) <> 14){
+            return false;
+        }
+        $calcular = 0;
+        $calcularDois = 0;
+        for ($i = 0, $x = 5; $i <= 11; $i++, $x--) {
+            $x = ($x < 2) ? 9 : $x;
+            $number = substr($cnpj, $i, 1);
+            $calcular += $number * $x;
+        }
+        for ($i = 0, $x = 6; $i <= 12; $i++, $x--) {
+            $x = ($x < 2) ? 9 : $x;
+            $numberDois = substr($cnpj, $i, 1);
+            $calcularDois += $numberDois * $x;
+        }
+ 
+        $digitoUm = (($calcular % 11) < 2) ? 0 : 11 - ($calcular % 11);
+        $digitoDois = (($calcularDois % 11) < 2) ? 0 : 11 - ($calcularDois % 11);
+ 
+        if ($digitoUm <> substr($cnpj, 12, 1) || $digitoDois <> substr($cnpj, 13, 1)) {
+            return false;
+        }
+        return true;
 	}
 	
 	public static function formatarDocumento ($string){
