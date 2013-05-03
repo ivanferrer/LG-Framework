@@ -102,20 +102,27 @@ class Setup extends DAO {
 namespace model;
 use \core as c;
 use \exceptions as e;
+use \lib as l;
 class ".$this->classeFromTabela($tabela)." extends c\Modelo{
 ";
 		$result = $this->con->query('describe '.$tabela);
+		$constraints = $this->con->query("select * from INFORMATION_SCHEMA.TABLE_CONSTRAINTS where CONSTRAINT_SCHEMA = '".LGF_BD_NOME."' and TABLE_NAME = '$tabela'");
+		$constraints = $constraints->fetchAll();
 		while($linha = $result->fetch(\PDO::FETCH_ASSOC)){
-			$modelo .= '
-		private $'.$linha['Field'].';';
+			$encap = ($linha['Key'] == 'PRI' && $linha['Extra'] == 'auto_increment') ? "protected" : "private";
+			$modelo .= "
+		$encap $".$linha['Field'].';';
 		}
 		
 		$modelo .= "
 
 		public function __construct(){";
 
-		$result = $this->con->query('describe '.$tabela);
 		$pk_auto = null;
+		$fks = array();
+		$pks = array();
+		$uniques = array();
+		$result = $this->con->query('describe '.$tabela);
 		while($linha = $result->fetch(\PDO::FETCH_ASSOC)){
 			$val = (is_int($linha['Default'])) ? $linha['Default'] : "'".$linha['Default']."'" ;
 			$val = ($val == "''") ? "NULL" : $val;
@@ -128,9 +135,27 @@ class ".$this->classeFromTabela($tabela)." extends c\Modelo{
 			}
 			$modelo .='
 			$this->'.$linha['Field']." = ".$val.';';
+
+			if($linha['Key'] == 'MUL' || $linha['Key'] == 'UNI'){
+			    foreach($constraints as $cnst){
+			        if(strstr($cnst['CONSTRAINT_NAME'], $linha['Field'])){
+			            switch($cnst['CONSTRAINT_TYPE']){
+			                case 'UNIQUE':
+			                    $uniques[] = "'".$linha['Field']."'=>'".$cnst['CONSTRAINT_NAME']."'";
+			                    break;
+			                case 'FOREIGN KEY':
+			                    $fks[] = "'".$linha['Field']."'=>'".$cnst['CONSTRAINT_NAME']."'";
+			                    break;
+			            }
+			        }
+			    }
+			}
+			if($linha['Key'] == 'PRI'){
+			    $pks[] = "'".$linha['Field']."'";
+			};
 		}
 		$modelo .="
-			parent::__construct('$pk_auto','$tabela');
+			parent::__construct(".implode(",", $pks).",'$tabela',array(".implode(",", $fks)."),array(".implode(",", $uniques)."));
 		}
 ";
 
@@ -149,16 +174,17 @@ class ".$this->classeFromTabela($tabela)." extends c\Modelo{
 		$modelo = $this->gerarHeader();
 		$modelo .='
 namespace dao;
-use core as c;
-use model as m;
-use exceptions as e;
+use \core as c;
+use \model as m;
+use \exceptions as e;
+use \lib as l;
 class '.$this->classeFromTabela($tabela).' extends c\DAO{
 		
-		private $'.$this->classeFromTabela($tabela).';
+		private $modelo;
 				
 		public function __construct(m\\'.$this->classeFromTabela($tabela).' $'.$this->classeFromTabela($tabela).' = null){
 			parent::__construct();
-			$this->'.$this->classeFromTabela($tabela).' = $'.$this->classeFromTabela($tabela).';
+			$this->modelo = (is_null($'.$this->classeFromTabela($tabela).')) ? new m\\'.$this->classeFromTabela($tabela).' : $'.$this->classeFromTabela($tabela).';
 		}
 					
 }
@@ -221,6 +247,8 @@ class '.$this->classeFromTabela($tabela).' extends c\DAO{
 		public function set".$this->classeFromTabela($describeCampo['Field']).'($value){';
 		$tamanho = $this->getTamanhoTipo($describeCampo['Type'],'tamanho');
 		$tipo = $this->getTamanhoTipo($describeCampo['Type'],'tipo');
+		$nome = (strstr($describeCampo['Field'],"_")) ? ucwords(str_replace("_"," ",strstr($describeCampo['Field'],"_"))) : ucfirst($describeCampo['Field']);
+		$nome = trim($nome);
 		if(!is_null($tamanho)){
 			if ($tipo == 'enum'){
 				$return.= '
@@ -241,13 +269,14 @@ class '.$this->classeFromTabela($tabela).' extends c\DAO{
 				$mensagem = 'no máximo '.$tamanho.' caracteres';
 			}
 				$return.='
-				throw new e\ModeloException("O campo '.$describeCampo['Field'].' deve conter '.$mensagem.'");
+				throw new e\ModeloException("O campo '.$nome.' deve conter '.$mensagem.'");
 			}';
 		}
+		
 		if($describeCampo['Null'] == 'NO'){
 			$return.='
 			if($value == "" || is_null($value)){
-				throw new e\ModeloException("O campo '.$describeCampo['Field'].' não deve estar vazio");
+				throw new e\ModeloException("O campo '.$nome.' não deve estar vazio");
 			}';
 		}
 		if($describeCampo['Type'] == 'date'){

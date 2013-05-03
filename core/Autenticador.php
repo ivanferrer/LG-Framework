@@ -53,13 +53,12 @@ abstract class Autenticador{
 				(	$metodosNaoAutenticados != 'todos'	&&	array_search($_SESSION['metodo'],$metodosNaoAutenticados) === false	)
 		){
     		if($this->logado === false && !($_SESSION['classe'] == CONTROLLER_LOGIN && $_SESSION['metodo'] == METODO_LOGIN)){
-    			    $_SESSION['LGF']['url'] = $_SERVER['REQUEST_URI'];
+    			    $_SESSION['LGF']['url'] = HTTP_FULL_PATH.$_SESSION['classe'].'/'.$_SESSION['metodo'];
     				throw new e\PermissionException($this->mensagemLoginInvalido);
     		}else{
     		    if(method_exists($this, 'permissaoDeAcesso')){
     		        $resposta = $this->permissaoDeAcesso($this->identidade,$_SESSION['classe'],$_SESSION['metodo']);
     		        if(!$resposta){
-        			    $_SESSION['LGF']['url'] = $_SERVER['REQUEST_URI'];
         				throw new e\PermissionException("O seu perfil não tem acesso a esta página");
     		        }
     		    }
@@ -82,9 +81,9 @@ abstract class Autenticador{
 			$this->verificarDados();
 			$this->setDadosSessao();
 			$_SESSION['LGF']['logado'] = hash("sha256",APP_DIR.PROJETO_NOME);
-			$getter = "get".str_replace(" ","",ucwords(str_replace("_"," ",$this->identidade->getPrimaryKey())));
-			$_SESSION['LGF']['identidade'] = $this->identidade->$getter();
-			if(isset($_SESSION['LGF']['url'])){
+			//$getter = "get".str_replace(" ","",ucwords(str_replace("_"," ",$this->identidade->getPrimaryKey())));
+			$_SESSION['LGF']['identidade'] = $this->identidade->getValorChavePrimaria();
+			if(isset($_SESSION['LGF']['url']) && strstr(HTTP_FULL_PATH, $_SESSION['LGF']['url'])){
 				header("Location: ".$_SESSION['LGF']['url']);
 			}else{
 				header("Location: ".HTTP_FULL_PATH);

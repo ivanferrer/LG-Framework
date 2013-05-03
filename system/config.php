@@ -1,7 +1,7 @@
 <?php
 // DEFINE Nome do Projeto
 	include_once(APP_DIR."config/config.php");
-	define('LGF_VERSAO','v1');
+	define('LGF_VERSAO','v1.1.0');
 	date_default_timezone_set('America/Sao_Paulo');
 	
 	LGF_definirConstante("PROJETO_NOME","LG Framwork",$_PROJETO_NOME);

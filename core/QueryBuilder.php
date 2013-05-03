@@ -15,6 +15,7 @@ class QueryBuilder extends ConnectionFactory {
     private $order;
     private $orderOrientacao;
     private $group;
+    private $limit;
 
     public function __construct() {
         $this->modelo = null;
@@ -27,7 +28,7 @@ class QueryBuilder extends ConnectionFactory {
         $this->order = array();
         $this->orderOrientacao = null;
         $this->group = array();
-        $this->con = $this->getConnection();
+        $this->limit = null;
     }
 
     public function addWhereEquals($campo, $valor) {
@@ -88,6 +89,12 @@ class QueryBuilder extends ConnectionFactory {
         $this->join[] = array('tabela'=>$tabela,'as'=>$as,'on'=>$on);
     }
 
+    public function addGroupBy($campo) {
+        if (is_array($campo))
+            $campo = implode(",", $campo);
+        $this->group[] = $campo;
+    }
+
     public function addOrderBy($campo, $orientacao = 'ASC') {
         if (is_array($campo)) {
             $campo = implode(",", $campo);
@@ -105,16 +112,20 @@ class QueryBuilder extends ConnectionFactory {
                     'Parâmetro $orientacao do addOrderBy() deve ser "ASC" ou "DESC"');
         }
     }
-
-    public function addGroupBy($campo) {
-        if (is_array($campo))
-            $campo = implode(",", $campo);
-        $this->group[] = $campo;
+    
+    public function setLimit($limit, $inicio = null){
+        if(!is_int($limit) || (!is_null($inicio) && !is_int($limit))){
+            throw new e\DaoException("Cláusula 'LIMIT' deve ser do tipo INTEGER");
+        }
+        $this->limit = $limit;
+        if(!is_null($inicio)){
+            $this->limit = $inicio.','.$limit;
+        }
     }
 
     public function getQuery(Modelo $modelo, $operacao) {
         $this->modelo = $modelo;
-        $this->tabela = $this->modelo->getTabela();
+        $this->tabela = $this->modelo->getTabelaDoModelo();
         $this->operacao = strtoupper($operacao);
 
         $query = $this->iniciarQuery();
@@ -137,6 +148,9 @@ class QueryBuilder extends ConnectionFactory {
             $query .= " order by " . implode(",", $this->order);
             $query .= " " . $this->orderOrientacao;
         }
+        if (!is_null($this->limit)) {
+            $query .= " LIMIT " . $this->limit;
+        }
         $this->__construct();
         return $query;
     }
@@ -153,7 +167,7 @@ class QueryBuilder extends ConnectionFactory {
                 break;
             case 'UPDATE':
                 foreach($this->campos as $campo){
-                    if($campo != $this->modelo->getPrimaryKey()){
+                    if($campo != $this->modelo->getChavePrimaria()){
                         $campos[] = $campo." = :".$campo;
                     }
                 }

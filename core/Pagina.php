@@ -16,8 +16,9 @@ abstract class Pagina {
 		$this->metodosNaoAutenticados = array();
 		$_classLogin = CONTROLLER_LOGIN;
 		$this->autenticacao = new $_classLogin();
-		unset($_classLogin);
 		$this->smarty = new Smarty();
+		$this->associarDados('post',$_POST);
+		unset($_POST);
 		$this->associarDados('LGF_alerta',$_SESSION['LGF_alerta']);
 		$this->generalContent = '';
 		$this->template = TEMPLATE_PADRAO;

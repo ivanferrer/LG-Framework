@@ -71,6 +71,7 @@ class Roteador{
 	}
 	
 	public function registrarSession(){
+	        $_SESSION['LGF']['HTTP_FULL_PATH'] = HTTP_FULL_PATH;
     		if(isset($_SESSION['LGF_alerta'])){
     			//Globals::setAlertaTipo($_SESSION['LGF_alerta']['mensagem'],$_SESSION['LGF_alerta']['classe']);
     			//unset($_SESSION['LGF_alerta']);

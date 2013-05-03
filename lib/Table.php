@@ -58,8 +58,12 @@ class Table {
         
     }
     
+    public function setClasse($classe){
+        $this->classe = $classe;
+    }
+    
     public function getHTML(){
-        $_return = "<table class='sortable' id='".$this->id."'><thead><tr>";
+        $_return = "<table class='".$this->classe."' id='".$this->id."'><thead><tr>";
         foreach($this->campos as $nome){
             if(in_array($nome,$this->camposExibir) || array_key_exists($nome, $this->camposExibir)){
                 if(array_key_exists($nome, $this->camposExibir)){

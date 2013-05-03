@@ -210,18 +210,40 @@ class Functions{
     	endfor;
     	return $mask;
 	}
-	
+//*	
 	public static function toJson(array $array){
 		$dados = array();
 		foreach($array as $key => &$value){
-			$dados[] .= '"'.$key.'":"'.$value.'"';
+		    if(is_array($value)){
+		        foreach($value as $k => $val){
+		            $dados[$key][$k] = utf8_encode($val);
+		        }
+		    }else{
+		        $dados[$key] = utf8_encode($value); 
+		    }
 		}
-		$return = "{ ";
-		$return.= implode(",",$dados);
-		$return.= " }";
-		return $return;
+		return json_encode($dados);
 	}
 	
+
+/*/
+	public static function toJson(array $array){
+	    $dados = array();
+        $op = array("{","}");
+	    foreach($array as $key => &$value){
+	        if(is_array($value)){
+	            $dados[] = Functions::toJson($value);
+	            $op = array("[","]");
+	        }else{
+	            $dados[] .= '"'.$key.'":"'.$value.'"';
+	        }
+	    }
+	    $return = $op[0];
+	    $return.= implode(",",$dados);
+	    $return.= $op[1];
+	    return $return;
+	}
+	//*/
 	public static function buscaCEP($cep){
 	    $cep = preg_replace("/[^0-9]/",'',$cep);
 	    $ch = curl_init();

@@ -17,13 +17,12 @@ function handleShutdown() {
 	$error = error_get_last();
 	if(strstr($error['file'],"autoload.php") === false){
 		if($error !== NULL){
-			$e = new \Exception($error['message'].$error['line'].$error['file']);
+			$e = new e\PHPException(0, $error['message'],$error['file'],$error['line']);
 			$mensagem =  e\ExceptionHandler::tratarErro($e);
         	$smarty = new c\Smarty();
         	$smarty->assign("mensagem",$mensagem);
         	$smarty->display('500.tpl');
 		}else{
-		    ///echo'shut';
 			//yourPrintOrMailFunction("SHUTDOWN");
 		}
 	}

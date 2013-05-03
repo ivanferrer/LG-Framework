@@ -17,6 +17,7 @@ abstract class DAO extends ConnectionFactory{
 	private $valores;
 	private $operacaoMultipla;
 	private $tipoOperacao;
+	private $paramsWhere;
 	protected $QueryBuilder;
 	
 	public function __construct(){
@@ -26,6 +27,7 @@ abstract class DAO extends ConnectionFactory{
     	$this->valores = array();
     	$this->operacaoMultipla = false;
 	    $this->preparedStatus = false;
+	    $this->paramsWhere = array();
 	}
 	
 	private function prepareStatement($obj){
@@ -33,10 +35,9 @@ abstract class DAO extends ConnectionFactory{
 		    if(!$this->QueryBuilder->issetCampos()){
 		        $this->QueryBuilder->setCamposValores($this->campos, $this->valores);
 		    }
-		    $camposWhere = $this->QueryBuilder->getParametroWhere();
+		    $this->paramsWhere = $this->QueryBuilder->getParametroWhere();
 		    $sql = $this->QueryBuilder->getQuery($obj, $this->tipoOperacao);
 			$this->statement = $this->con->prepare($sql);
-			return $camposWhere;
 		}
 	}
 	
@@ -56,7 +57,7 @@ abstract class DAO extends ConnectionFactory{
 			$value = $obj->{$gets[$key]}();
 		    if(!is_null($value) && $this->tipoOperacao != 'SELECT'){
 		        if($ignoreKey){
-		            if($campo != $obj->getPrimaryKey()){
+		            if($campo != $obj->getChavePrimaria()){
             			$this->campos[$key] = $campo;
             			$this->valores[$key] = $value;
 		            }
@@ -68,26 +69,29 @@ abstract class DAO extends ConnectionFactory{
 		}
 	}
 	
-	private function bindParams($extra = null){
-		if(!is_null($extra) && count($extra) > 0){
-		    foreach($extra as $key => $value){
+	private function bindParams(){
+		if(count($this->paramsWhere) > 0){
+		    foreach($this->paramsWhere as $key => $value){
 		        $this->statement->bindValue($key,$value);
 		    }
-		}elseif($this->tipoOperacao != 'SELECT'){
-    		foreach($this->campos as $key => &$value){
-    			$this->statement->bindValue($value, $this->valores[$key]);
-    		}
+		}
+		foreach($this->campos as $key => &$value){
+			$this->statement->bindValue($value, $this->valores[$key]);
 		}
 	}
 	
 	public function getId(Modelo $obj,$id){
 	    try{
-    		$this->QueryBuilder->addWhereEquals($obj->getPrimaryKey(), $id);
+    		$this->QueryBuilder->addWhereEquals($obj->getChavePrimaria(), $id);
     		$list = $this->select($obj);
     		$list->rewind();
     		return $list->current();
 	    }catch(\PDOException $e){
-	        throw new e\DaoException($e->errorInfo[2],$e->errorInfo[1],$e);
+	        if(isset($e->errorInfo[2])){
+	            throw new e\DaoException($e->errorInfo[2],$e->errorInfo[1],$e);
+	        }else{
+	            throw new e\DaoException($e->getMessage());
+	        }
 	    }
 	}
 	
@@ -96,28 +100,29 @@ abstract class DAO extends ConnectionFactory{
 	 * @return SplObjectStorage (Lista/Array de Objetos)
 	 * @throws \PDOException
 	 */
-	public function select(Modelo $obj){
+	public function select(Modelo $obj,$retornoGenerico = false){
 	    try{
     		$this->startTransaction();
 
     		    $this->tipoOperacao = "SELECT";
         		$list = new \SplObjectStorage();
-        		$this->setParams($obj);
-        		$extraParams = $this->prepareStatement($obj);
-        		$this->bindParams($extraParams);
-        		
+    		    $this->setParams($obj);
+        		$this->prepareStatement($obj);
+        		$this->bindParams();
         		$erro = $this->statement->execute();
-        		
-        		$this->statement->errorInfo();
-        		$classe = strtolower(get_class($obj));
-        	    $this->statement->setFetchMode(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE, get_class($obj));
+        		$classReturned = ($retornoGenerico) ? 'stdClass' : get_class($obj);
+        	    $this->statement->setFetchMode(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE, $classReturned);
         		while($obj = $this->statement->fetch()){
         			$list->attach($obj);
         		}
     		$this->encerrarQuery();
     		return $list;
 	    }catch(\PDOException $e){
-	        throw new e\DaoException($e->getMessage());
+	        if(isset($e->errorInfo[2])){
+	            throw new e\DaoException($e->errorInfo[2],$e->errorInfo[1],$e);
+	        }else{
+	            throw new e\DaoException($e->getMessage());
+	        }
 	    }
 	}
 	
@@ -135,12 +140,15 @@ abstract class DAO extends ConnectionFactory{
         		$this->prepareStatement($obj);
         		$this->bindParams();
         		$erro = $this->statement->execute();
-        		$this->statement->errorInfo();
         		$obj->setIncrementId($this->con->lastInsertId());
     		
     		$this->encerrarQuery();
 	    }catch(\PDOException $e){
-	        throw new e\DaoException($e->errorInfo[2],$e->errorInfo[1],$e);
+	        if(isset($e->errorInfo[2])){
+	            throw new e\DaoException($e->errorInfo[2],$e->errorInfo[1],$e);
+	        }else{
+	            throw new e\DaoException($e->getMessage());
+	        }
 	    }
 	}
 	
@@ -150,17 +158,20 @@ abstract class DAO extends ConnectionFactory{
 
     		    $this->tipoOperacao = "UPDATE";
         		$this->setParams($obj,true);
-        		$call = 'get'.str_replace(" ","",ucwords(str_replace("_"," ", $obj->getPrimaryKey())));
-        		$id = $obj->$call();
-        	    $this->QueryBuilder->addWhereEquals($obj->getPrimaryKey(), $id);
+        		//$call = 'get'.str_replace(" ","",ucwords(str_replace("_"," ", $obj->getChavePrimaria())));
+        		//$id = $obj->$call();
+        	    $this->QueryBuilder->addWhereEquals($obj->getChavePrimaria(), $obj->getValorChavePrimaria());
         		$this->prepareStatement($obj);
         		$this->bindParams();
         		$erro = $this->statement->execute();
-        		$this->statement->errorInfo();	    
     		
     		$this->encerrarQuery();
 	    }catch(\PDOException $e){
-	        throw new e\DaoException($e->errorInfo[2],$e->errorInfo[1],$e);
+	        if(isset($e->errorInfo[2])){
+	            throw new e\DaoException($e->errorInfo[2],$e->errorInfo[1],$e);
+	        }else{
+	            throw new e\DaoException($e->getMessage());
+	        }
 	    }
 	}
 	
@@ -170,17 +181,20 @@ abstract class DAO extends ConnectionFactory{
 
     		    $this->tipoOperacao = "DELETE";
         		$this->setParams($obj,true);
-        		$call = 'get'.str_replace(" ","",ucwords(str_replace("_"," ", $obj->getPrimaryKey())));
-        		$id = $obj->$call();
-        	    $this->QueryBuilder->addWhereEquals($obj->getPrimaryKey(), $id);
+        		//$call = 'get'.str_replace(" ","",ucwords(str_replace("_"," ", $obj->getChavePrimaria())));
+        		//$id = $obj->$call();
+        	    $this->QueryBuilder->addWhereEquals($obj->getChavePrimaria(), $obj->getValorChavePrimaria());
         		$this->prepareStatement($obj);
         		$this->bindParams();
-        		$erro = $this->statement->execute();
-        		$this->statement->errorInfo();	    
+        		$this->statement->execute();
     		
     		$this->encerrarQuery();
 	    }catch(\PDOException $e){
-	        throw new e\DaoException($e->errorInfo[2],$e->errorInfo[1],$e);
+	        if(isset($e->errorInfo[2])){
+	            throw new e\DaoException($e->errorInfo[2],$e->errorInfo[1],$e);
+	        }else{
+	            throw new e\DaoException($e->getMessage());
+	        }
 	    }
 	}
 	
@@ -199,7 +213,11 @@ abstract class DAO extends ConnectionFactory{
     		$this->encerrarQuery();
     		return $return;
 	    }catch(\PDOException $e){
-	        throw new e\DaoException($e->errorInfo[2],$e->errorInfo[1],$e);
+	        if(isset($e->errorInfo[2])){
+	            throw new e\DaoException($e->errorInfo[2],$e->errorInfo[1],$e);
+	        }else{
+	            throw new e\DaoException($e->getMessage());
+	        }
 	    }
 	}
 	

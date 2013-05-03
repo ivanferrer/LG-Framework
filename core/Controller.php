@@ -27,33 +27,112 @@ abstract class Controller {
 		return $this->metodosNaoAutenticados;
 	}
 	
-	public function inserir(){
+	public function listar(){
+	        return $this->dao->select($this->model);
+	}
+	
+	public function inserir($json = false){
 	    try{
-    	    $call = '\dao\\'.Globals::getClasse();
-    	    $dao = new $call();
-    	    
     	    Globals::setAlertTipo("alert");
-    	    $call = '\model\\'.Globals::getClasse();
-    	    $modelo = new $call();
-    	    l\Functions::setObjectFromArray($modelo, $_POST);
+    	    $arr = $_POST;
+	        if($json){
+                foreach($_POST as $key => $value){
+                    $arr[$key] = utf8_decode($value);
+                }
+	        }
+	        l\Functions::setObjectFromArray($this->model, $arr);
     	    
-    	    $dao->insert($modelo);
+    	    $this->dao->insert($this->model);
+
+    	    $call = 'get'.str_replace(" ","",ucwords(str_replace("_"," ", $this->model->getPrimaryKey())));
+    	    $json_resp['id'] = $this->model->$call();
+    	    
     	    Globals::setAlertTipo("success");
-    	    Globals::setAlertMensagem("Cadastro Realizado com sucesso!");
-	        $dao->commit();
-	    }catch(e\ModeloException $e){
-	        Globals::setAlertMensagem($e->getMessage());
-	        $dao->rollBack();
-	        echo"oi";
-	    }catch(\PDOException $e){
-	        Globals::setAlertMensagem($e->getMessage());
-	        $dao->rollBack();
+            $nome = explode('\\', get_class($this));
+    	    Globals::setAlertMensagem($nome[1]." inserido com sucesso!");
+	        $this->dao->commit();
 	    }catch(\Exception $e){
+    	    Globals::setAlertTipo("error");
 	        Globals::setAlertMensagem($e->getMessage());
-	        $dao->rollBack();
+	        $this->dao->rollBack();
+	        e\ExceptionHandler::tratarErro($e);
 	    }
-    	$anterior = Globals::getAnterior();
-	    header("Location: ".HTTP_PATH.$anterior['urlChamada'],true,307);
+	    if($json){
+    	    $json_resp['status'] = Globals::getAlertTipo();
+    	    $json_resp['mensagem'] = Globals::getAlertMensagem();
+	        //echo json_encode($json_resp);
+	        echo l\Functions::toJson($json_resp);
+	    }else{
+        	$anterior = Globals::getAnterior();
+    	    header("Location: ".HTTP_PATH.$anterior['urlChamada'],true,307);
+	    }
+	}
+	
+	public function alterar($json = false){
+	    try{
+    	    Globals::setAlertTipo("alert");
+    	    $arr = $_POST;
+	        if($json){
+                foreach($_POST as $key => $value){
+                    $arr[$key] = utf8_decode($value);
+                }
+	        }
+	        l\Functions::setObjectFromArray($this->model, $arr);
+    	    $this->dao->update($this->model);
+    	    
+    	    Globals::setAlertTipo("success");
+            $nome = explode('\\', get_class($this));
+    	    Globals::setAlertMensagem($nome[1]." alterado com sucesso!");
+    	    $this->dao->commit();
+	    }catch(\Exception $e){
+    	    Globals::setAlertTipo("error");
+	        Globals::setAlertMensagem($e->getMessage());
+	        $this->dao->rollBack();
+	        e\ExceptionHandler::tratarErro($e);
+	    }
+	    
+	    if($json){
+    	    $json_resp['status'] = Globals::getAlertTipo();
+    	    $json_resp['mensagem'] = utf8_encode(Globals::getAlertMensagem());
+	        echo l\Functions::toJson($json_resp);
+	    }else{
+        	$anterior = Globals::getAnterior();
+    	    header("Location: ".HTTP_PATH.$anterior['urlChamada'],true,307);
+	    }
+	}
+	
+	public function excluir($json = false){
+	    try{
+    	    Globals::setAlertTipo("alert");
+    	    $arr = $_POST;
+	        if($json){
+                foreach($_POST as $key => $value){
+                    $arr[$key] = utf8_decode($value);
+                }
+	        }
+	        l\Functions::setObjectFromArray($this->model, $arr);
+	        
+    	    $this->dao->delete($this->model);
+    	    
+    	    Globals::setAlertTipo("success");
+            $nome = explode('\\', get_class($this));
+    	    Globals::setAlertMensagem($nome[1]." excluído com sucesso!");
+	        $this->dao->commit();
+	    }catch(\Exception $e){
+    	    Globals::setAlertTipo("error");
+	        Globals::setAlertMensagem($e->getMessage());
+	        $this->dao->rollBack();
+	        e\ExceptionHandler::tratarErro($e);
+	    }
+	    
+	    if($json){
+    	    $json_resp['status'] = Globals::getAlertTipo();
+    	    $json_resp['mensagem'] = Globals::getAlertMensagem();
+	        echo l\Functions::toJson($json_resp);
+	    }else{
+        	$anterior = Globals::getAnterior();
+    	    header("Location: ".HTTP_PATH.$anterior['urlChamada'],true,307);
+	    }
 	}
 	
 	/*
