@@ -41,10 +41,21 @@ abstract class Autenticador{
 	private static function destruirSessao(){
 		session_unset();
 		session_destroy();
-		header("Location: ".HTTP_PATH);
+		header("Location: ".HTTP_PATH.LGF_SUBAPP);
 	}
 	
 	public function verificarPermissao($obj){
+		if(Globals::getTipo() == 'controller'){
+			$metodosAcessiveisPorUrl = $obj->getMetodosAcessiveisPorUrl();
+			$metodosNaoAcessiveisPorUrl = $obj->getMetodosNaoAcessiveisPorUrl();
+			if(
+					(	$metodosNaoAcessiveisPorUrl == 'todos'	||	array_search($_SESSION['metodo'],$metodosNaoAcessiveisPorUrl) !== false	)
+					&&
+					(	$metodosAcessiveisPorUrl != 'todos'	&&	array_search($_SESSION['metodo'],$metodosAcessiveisPorUrl) === false	)
+			){
+				throw new e\PageException(null,404);
+			}
+		}
 		$metodosAutenticados = $obj->getMetodosAutenticados();
 		$metodosNaoAutenticados = $obj->getMetodosNaoAutenticados();
 		if(
@@ -82,11 +93,11 @@ abstract class Autenticador{
 			$this->setDadosSessao();
 			$_SESSION['LGF']['logado'] = hash("sha256",APP_DIR.PROJETO_NOME);
 			//$getter = "get".str_replace(" ","",ucwords(str_replace("_"," ",$this->identidade->getPrimaryKey())));
-			$_SESSION['LGF']['identidade'] = $this->identidade->getValorChavePrimaria();
+			$_SESSION['LGF']['identidade'] = $this->identidade->getAutoIncrementId();
 			if(isset($_SESSION['LGF']['url']) && strstr(HTTP_FULL_PATH, $_SESSION['LGF']['url'])){
 				header("Location: ".$_SESSION['LGF']['url']);
 			}else{
-				header("Location: ".HTTP_FULL_PATH);
+				header("Location: ".HTTP_FULL_PATH.LGF_SUBAPP);
 			}
 		}catch(e\PermissionException $e){
 			throw $e;

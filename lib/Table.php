@@ -31,12 +31,14 @@ class Table {
         $nome = get_class($objetoEx);
         $this->id = str_replace("\\","_",$nome);
         $lista->rewind();
-        $_ref = new \ReflectionClass(get_class($objetoEx));
+        $_ref = new \ReflectionObject($objetoEx);
         $_ret = $_ref->getProperties();
         foreach($lista as $linha => $valor){
             foreach($_ret as $key => $_attributo){
-                $call = 'get'.str_replace(" ","",ucwords(str_replace("_"," ",$_attributo->name)));
-                $this->valores[$linha][$_attributo->name] = $valor->$call();
+                $_attributo->setAccessible( true );
+                $this->valores[$linha][$_attributo->name] = $_attributo->getValue($valor);
+                //$call = 'get'.str_replace(" ","",ucwords(str_replace("_"," ",$_attributo->name)));
+                //$this->valores[$linha][$_attributo->name] = $valor->$call();
                 
                 if($linha == 0){
                     $this->campos[$_attributo->name] = $_attributo->name;
@@ -91,12 +93,12 @@ class Table {
         return $_return;
     }
     
-    public function addLink($nomeColuna,$url,$campoParametroUrl,$imagemSrc = null){
+    public function addLink($nomeColuna,$url,$campoParametroUrl,$imagemSrc = null,$target = "_self"){
         $this->campos[$nomeColuna] = $nomeColuna;
         $this->addCampoExibir($nomeColuna);
         $image = (is_null($imagemSrc)) ? $nomeColuna : "<img width=20 height=20 src='$imagemSrc' />";
         foreach($this->valores as &$valor){
-            $html = "<a href='".$url.$valor[$campoParametroUrl]."'>".$image."</a>";
+            $html = "<a target='$target' href='".$url.$valor[$campoParametroUrl]."'>".$image."</a>";
             $valor[$nomeColuna] = $html;
         }
         /*

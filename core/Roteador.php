@@ -13,6 +13,9 @@ class Roteador{
 	private $urlFinal;
 	
 	public function __construct($sysAction){
+		if(LGF_SUBAPP != ''){
+			$sysAction = str_replace(LGF_SUBAPP."/","", $sysAction);
+		}
 		$actions = explode("/", $sysAction);
 		$this->urlFinal = "";
 		if($actions[0] == 'setup' && HABILITA_SETUP == true){
@@ -42,10 +45,16 @@ class Roteador{
 		}else{
 			$this->tipo = 'view';
 		}
+
 		$this->classe = ($actions[0] != '') ? $actions[0] : VIEW_PADRAO;
 		$this->urlFinal .= $this->classe;
 		$this->metodo = (isset($actions[1]) && $actions[1] != '') ? $actions[1] : METODO_PADRAO;
 		$this->urlFinal .= "/".$this->metodo;
+
+		if(LGF_SUBAPP != ''){
+			$this->urlFinal = LGF_SUBAPP."/".$this->urlFinal;
+		}
+		
 		if (extension_loaded ('newrelic')) {
 		    newrelic_name_transaction ($this->urlFinal);
 		}
@@ -60,9 +69,12 @@ class Roteador{
 	}
 	
 	public function instanciarObj(){
-		if(file_exists(APP_DIR.$this->tipo.DS."$this->classe.php")){
+		$file = APP_DIR.LGF_SUBAPP.DS.$this->tipo.DS."$this->classe.php";
+		$file = str_replace(DS.DS,DS, $file);
+		if(file_exists($file)){
 			$x = "call";
-			$$x = $this->tipo."\\".$this->classe;
+			$instance = LGF_SUBAPP."\\".$this->tipo."\\".$this->classe;
+			$$x = str_replace("\\\\","\\", $instance);
 			$this->obj = new $call();
 		}else{
 			throw new e\PageException(null,404);
@@ -99,7 +111,6 @@ class Roteador{
     		Globals::setClasse($_SESSION['classe']);
     		Globals::setUrlChamada($_SESSION['urlChamada']);
     		Globals::setAnterior($_SESSION['anterior']);
-		
 	}
 	
 	public function verificarPermissao(){

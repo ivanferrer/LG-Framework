@@ -1,6 +1,7 @@
 <?php
 
 include_once(__DIR__.DIRECTORY_SEPARATOR."paths.php");
+include_once(__DIR__.DIRECTORY_SEPARATOR."app.php");
 include_once(__DIR__.DIRECTORY_SEPARATOR."config.php");
 include_once(__DIR__.DIRECTORY_SEPARATOR."autoload.php");
 include_once(__DIR__.DIRECTORY_SEPARATOR."erros.php");

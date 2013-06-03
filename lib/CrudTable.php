@@ -42,7 +42,7 @@ class CrudTable {
     public function setList(\SplObjectStorage $lista){
         $lista->rewind();
         $objetoEx = $lista->current();
-        $this->relacionamentos = $objetoEx->getChaveRelacionamentos();
+        $this->relacionamentos = $objetoEx->getChavesRelacionais();
         $nome = get_class($objetoEx);
         $this->id = str_replace("\\","_",$nome);
         $nome = explode('\\', $nome);
@@ -125,9 +125,10 @@ class CrudTable {
                 }
                 
         };
+        $subapp = (LGF_SUBAPP != '') ? LGF_SUBAPP."/" : "";
         $ret = '
         <div id="'.$this->id."-".$action.'" class="modal modal-form hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3" aria-hidden="true">
-            <form class="form-horizontal" method="POST" action="'.HTTP_PATH."c/".$this->objetoNome."/".$action.'">
+            <form class="form-horizontal" method="POST" action="'.HTTP_PATH.$subapp."c/".$this->objetoNome."/".$action.'">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <h3 id="myModalLabel3">'.ucfirst($action).' '.$this->objetoNome.'</h3>

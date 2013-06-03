@@ -47,7 +47,8 @@ abstract class Pagina {
 	}
 
 	public function setTemplate($value) {
-		if (file_exists("template".DS.$value)) {
+		$pre = (LGF_SUBAPP != '') ? LGF_SUBAPP.DS : ''; 
+		if (file_exists($pre."template".DS.$value)) {
 			$this->template = $value;
 		} else {
 			throw new \Exception("O Template $value não existe", 1002);

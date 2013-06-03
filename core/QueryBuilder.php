@@ -31,24 +31,29 @@ class QueryBuilder extends ConnectionFactory {
         $this->limit = null;
     }
 
-    public function addWhereEquals($campo, $valor) {
+    public function addWhereEquals($campo, $valor, $operador = "AND", $agrupamento = 0) {
         if ($valor != "") {
-            $this->query[] = "$campo = :where_eq_$campo";
-            $this->parametroWhere[':where_eq_'.$campo] = $valor;
+            $whr = ":where_eq_".preg_replace("/[^A-Za-z]/",'',$campo);
+            //$this->query[$operador][$agrupamento][] = "$campo = :where_eq_$campo";
+            $this->query[] = "$campo = $whr";
+            $this->parametroWhere[$whr] = $valor;
+            
         }
     }
 
     public function addWhereDifferent($campo, $valor) {
         if ($valor != "") {
-            $this->query[] = "$campo != :where_df_$campo";
-            $this->parametroWhere[':where_df_'.$campo] = $valor;
+            $whr = ":where_df_".preg_replace("/[^A-Za-z]/",'',$campo);
+            $this->query[] = "$campo != $whr";
+            $this->parametroWhere[$whr] = $valor;
         }
     }
 
     public function addWhereLike($campo, $valor) {
         if ($valor != "") {
-            $this->query[] = "$campo LIKE '%:where_lk_$campo%'";
-            $this->parametroWhere[':where_lk_'.$campo] = $valor;
+            $whr = ":where_lk_".preg_replace("/[^A-Za-z]/",'',$campo);
+            $this->query[] = "$campo LIKE '%$whr%'";
+            $this->parametroWhere[$whr] = $valor;
         }
     }
 
@@ -58,8 +63,9 @@ class QueryBuilder extends ConnectionFactory {
                 $value = (is_string($value)) ? "'".$value."'" : $value;
             }
             $valor = implode(",", $valor);
-            $this->query[] = "$campo in(':where_in_$campo')";
-            $this->parametroWhere[':where_in_'.$campo] = $valor;
+            $whr = ":where_in_".preg_replace("/[^A-Za-z]/",'',$campo);
+            $this->query[] = "$campo in('$whr')";
+            $this->parametroWhere[$whr] = $valor;
         }
     }
 
@@ -69,16 +75,18 @@ class QueryBuilder extends ConnectionFactory {
                 $value = (is_string($value)) ? "'".$value."'" : $value;
             }
             $valor = implode(",", $valor);
-            $this->query[] = "$campo not in(':where_$valor')";
-            $this->parametroWhere[':where_'.$campo] = $valor;
+            $whr = ":where_ni_".preg_replace("/[^A-Za-z]/",'',$campo);
+            $this->query[] = "$campo not in('$whr')";
+            $this->parametroWhere[$whr] = $valor;
         }
     }
 
     public function addWhereBetween($campo, $start, $end) {
-        
-        $this->query[] = "$campo between ':" . $campo . "_start' AND ':".$campo."_end'";
-        $this->parametroWhere[$campo.'_start'] = $start;
-        $this->parametroWhere[$campo.'_end'] = $end;
+
+        $whr = ":where_dt_".preg_replace("/[^A-Za-z]/",'',$campo);
+        $this->query[] = "$campo between '" . $whr . "_start' AND '".$whr."_end'";
+        $this->parametroWhere[$whr.'_start'] = $start;
+        $this->parametroWhere[$whr.'_end'] = $end;
     }
 
     public function addWhereCustom($customWhere) {
@@ -167,9 +175,16 @@ class QueryBuilder extends ConnectionFactory {
                 break;
             case 'UPDATE':
                 foreach($this->campos as $campo){
-                    if($campo != $this->modelo->getChavePrimaria()){
-                        $campos[] = $campo." = :".$campo;
-                    }
+		            $pk = $this->modelo->getChavePrimaria();
+		            if(is_array($pk)){
+		                if(!in_array($campo,$pk)){
+		                    $campos[] = $campo." = :".$campo;
+		                }
+		            }else{
+    		            if($campo != $pk){
+    		                $campos[] = $campo." = :".$campo;
+    		            }
+		            }
                 }
                 $query =  "UPDATE $this->tabela SET ".implode(", ",$campos);
                 break;

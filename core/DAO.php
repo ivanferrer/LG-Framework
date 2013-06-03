@@ -59,9 +59,17 @@ abstract class DAO extends ConnectionFactory{
 			$value = $obj->{$gets[$key]}();
 		    if(!is_null($value) && $this->tipoOperacao != 'SELECT'){
 		        if($ignoreKey){
-		            if($campo != $obj->getChavePrimaria()){
-            			$this->campos[$key] = $campo;
-            			$this->valores[$key] = $value;
+		            $pk = $obj->getChavePrimaria();
+		            if(is_array($pk)){
+		                if(!in_array($campo,$pk)){
+		                    $this->campos[$key] = $campo;
+		                    $this->valores[$key] = $value;
+		                }
+		            }else{
+    		            if($campo != $pk){
+                			$this->campos[$key] = $campo;
+                			$this->valores[$key] = $value;
+    		            }
 		            }
 		        }else{
         			$this->campos[$key] = $campo;
@@ -73,12 +81,12 @@ abstract class DAO extends ConnectionFactory{
 	
 	private function bindParams(){
 		if(count($this->paramsWhere) > 0){
-		    foreach($this->paramsWhere as $key => &$value){
-		        $val = $this->statement->bindParam($key,$value);
+		    foreach($this->paramsWhere as $key => $value){
+		        $val = $this->statement->bindValue($key,$value);
 		        $this->finalQuery = str_replace($key,$value,$this->finalQuery);
 		    }
 		}
-		foreach($this->campos as $key => &$value){
+		foreach($this->campos as $key => $value){
 		    if($this->tipoOperacao != 'DELETE'){
     	        $this->finalQuery = str_replace($key,$value,$this->finalQuery);
     			$this->statement->bindValue($value, $this->valores[$key]);
@@ -86,9 +94,17 @@ abstract class DAO extends ConnectionFactory{
 		}
 	}
 	
-	public function getId(Modelo $obj,$id){
+	public function getId($id, Modelo $obj = null){
+		$obj = (is_null($obj)) ? $this->modelo : $obj;
 	    try{
-    		$this->QueryBuilder->addWhereEquals($obj->getChavePrimaria(), $id);
+    		$ids = $obj->getValorChavePrimaria();
+    		if(is_array($ids)){
+    		    foreach($ids as $key=>$value){
+    		        $this->QueryBuilder->addWhereEquals($key, $value);
+    		    }
+    		}else{
+    		    $this->QueryBuilder->addWhereEquals($obj->getChavePrimaria(), $id);
+    		}
     		$list = $this->select($obj);
     		$list->rewind();
     		return $list->current();
@@ -106,7 +122,8 @@ abstract class DAO extends ConnectionFactory{
 	 * @return SplObjectStorage (Lista/Array de Objetos)
 	 * @throws \PDOException
 	 */
-	public function select(Modelo $obj,$retornoGenerico = false){
+	public function select(Modelo $obj = null,$retornoGenerico = false){
+		$obj = (is_null($obj)) ? $this->modelo : $obj;
 	    try{
     		$this->startTransaction();
 
@@ -115,7 +132,7 @@ abstract class DAO extends ConnectionFactory{
     		    $this->setParams($obj);
         		$this->prepareStatement($obj);
         		$this->bindParams();
-        		$erro = $this->statement->execute();
+        		$this->statement->execute();
         		$classReturned = ($retornoGenerico) ? 'stdClass' : get_class($obj);
         	    $this->statement->setFetchMode(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE, $classReturned);
         		while($obj = $this->statement->fetch()){
@@ -146,7 +163,7 @@ abstract class DAO extends ConnectionFactory{
         		$this->prepareStatement($obj);
         		$this->bindParams();
         		$erro = $this->statement->execute();
-        		$obj->setValorChavePrimaria($this->con->lastInsertId());
+        		$obj->setAutoIncrementId($this->con->lastInsertId());
     		
     		$this->encerrarQuery();
 	    }catch(\PDOException $e){
@@ -166,7 +183,14 @@ abstract class DAO extends ConnectionFactory{
         		$this->setParams($obj,true);
         		//$call = 'get'.str_replace(" ","",ucwords(str_replace("_"," ", $obj->getChavePrimaria())));
         		//$id = $obj->$call();
-        	    $this->QueryBuilder->addWhereEquals($obj->getChavePrimaria(), $obj->getValorChavePrimaria());
+        		$id = $obj->getValorChavePrimaria();
+        		if(is_array($id)){
+        		    foreach($id as $key=>$value){
+        		        $this->QueryBuilder->addWhereEquals($key, $value);
+        		    }
+        		}else{
+        		    $this->QueryBuilder->addWhereEquals($obj->getChavePrimaria(), $id);
+        		}
         		$this->prepareStatement($obj);
         		$this->bindParams();
         		$erro = $this->statement->execute();
@@ -190,11 +214,15 @@ abstract class DAO extends ConnectionFactory{
         		//$call = 'get'.str_replace(" ","",ucwords(str_replace("_"," ", $obj->getChavePrimaria())));
         		//$id = $obj->$call();
         		$id = $obj->getValorChavePrimaria();
-        	    $this->QueryBuilder->addWhereEquals($obj->getChavePrimaria(), $id);
+        		if(is_array($id)){
+        		    foreach($id as $key=>$value){
+        		        $this->QueryBuilder->addWhereEquals($key, $value);
+        		    }
+        		}else{
+        		    $this->QueryBuilder->addWhereEquals($obj->getChavePrimaria(), $id);
+        		}
         		$this->prepareStatement($obj);
-        		echo $this->finalQuery;
         		$this->bindParams();
-        		echo $this->finalQuery;
         		$this->statement->execute();
     		
     		$this->encerrarQuery();
@@ -270,6 +298,7 @@ abstract class DAO extends ConnectionFactory{
 	private function encerrarQuery(){
     	if($this->operacaoMultipla){
     	    $this->preparedStatus = true;
+    	    $this->QueryBuilder = new QueryBuilder();
     	}else{
     	    $this->__construct();
     	}
@@ -287,6 +316,7 @@ abstract class DAO extends ConnectionFactory{
     	    if(ConnectionFactory::trasactionAtiva()){
         	    $this->con->commit();
                 ConnectionFactory::endTransaction();
+                $this->stopOperacaoMultipla();
     	    }
 	    }
 	}

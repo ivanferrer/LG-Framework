@@ -109,7 +109,7 @@ class ".$this->classeFromTabela($tabela)." extends c\Modelo{
 		$constraints = $this->con->query("select * from INFORMATION_SCHEMA.TABLE_CONSTRAINTS where CONSTRAINT_SCHEMA = '".LGF_BD_NOME."' and TABLE_NAME = '$tabela'");
 		$constraints = $constraints->fetchAll();
 		while($linha = $result->fetch(\PDO::FETCH_ASSOC)){
-			$encap = ($linha['Key'] == 'PRI' && $linha['Extra'] == 'auto_increment') ? "protected" : "private";
+			$encap = ($linha['Key'] == 'PRI') ? "protected" : "private";
 			$modelo .= "
 		$encap $".$linha['Field'].';';
 		}
@@ -153,9 +153,17 @@ class ".$this->classeFromTabela($tabela)." extends c\Modelo{
 			if($linha['Key'] == 'PRI'){
 			    $pks[] = "'".$linha['Field']."'";
 			};
+			if($linha['Extra'] == 'auto_increment'){
+			    $ai = "'".$linha['Field']."'";
+			};
+		}
+		if(count($pks) > 1){
+		    $pks = "array(".implode(",", $pks).")";
+		}else{
+		    $pks = $pks[0];
 		}
 		$modelo .="
-			parent::__construct(".implode(",", $pks).",'$tabela',array(".implode(",", $fks)."),array(".implode(",", $uniques)."));
+			parent::__construct(".$pks.",'$tabela',$ai,array(".implode(",", $fks)."),array(".implode(",", $uniques)."));
 		}
 ";
 
@@ -180,7 +188,7 @@ use \exceptions as e;
 use \lib as l;
 class '.$this->classeFromTabela($tabela).' extends c\DAO{
 		
-		private $modelo;
+		protected $modelo;
 				
 		public function __construct(m\\'.$this->classeFromTabela($tabela).' $'.$this->classeFromTabela($tabela).' = null){
 			parent::__construct();

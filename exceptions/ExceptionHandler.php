@@ -19,37 +19,26 @@ class ExceptionHandler{
 		$_ExHandler = new ExceptionHandler($e,$codigo);
 		$_ExHandler->registraLog();
 		if (extension_loaded('newrelic')){
-		    newrelic_notice_error($_ExHandler->getMensagem($e->getCode()),$e);
+		    newrelic_notice_error($_ExHandler->getMensagem($e),$e);
 		}
-		return $_ExHandler->getMensagem($e->getCode())."<br>".$_ExHandler->trace;
+		return $_ExHandler->getMensagem($e).$_ExHandler->trace;
 	}
 	
 	private function debug(){
-		$this->trace = "<pre style='text-align:left'>";
-		$this->trace.= "Mensagem Usuário: ".$this->getMensagem($this->exception->getCode())."<br><br>";
+		$this->trace = "<br><pre style='text-align:left'>";
+		$this->trace.= "Mensagem Usuário: ".$this->getMensagem($this->exception)."<br><br>";
 		$this->trace.= "Mensagem Sistema: ".$this->exception->getMessage()."<br><br>";
-
 		$this->trace.= "Código: [ {$this->exception->getCode()} ]<br>";
 		$this->trace.= "Linha: [ {$this->exception->getLine()} ]<br>";
 		$this->trace.= "Arquivo: ".$this->exception->getFile()."<br><br>";
 		$this->trace.= "Trace:<br>";
 		$this->trace.= print_r($this->exception->getTraceAsString(),true);
-		$this->trace.= "</pre>";
+		$this->trace.= "</pre><br>";
 	}
 	
-	private function getMensagem($codigoErro){
-	    $arquivo_erros_conf = APP_DIR.DS."config".DS."erros.conf";
-	    if(file_exists($arquivo_erros_conf)){
-	        //if(file_get_contents('./people.txt', true))
-	    }
-		switch ($codigoErro){
-			case 0 : return "Ocorreu um problema na execução do Script.";
-			case 1 : return "Erro de SQL";
-			case 1002 : return "Ocorreu um erro no site. Entre em contato com o suporte.";
-			case 404 : return "Página Não Encontrada";
-			case 1062:	return "Registro já existe.";
-			default: return "Erro Não Identificado, código: ".$codigoErro;
-		}	
+	private function getMensagem($e){
+	    $msg = new ErrorMessages($e);
+	    return $msg->getMessage();
 	}
 	
 	
@@ -79,11 +68,12 @@ class ExceptionHandler{
 			$trace = explode("#", $trace);
 			$trace = implode("\r\n", $trace);
 			$usuario = (isset($_SESSION['LGF']['identidade'])) ? $_SESSION['LGF']['identidade']  : "não está logado";
+			$usuario = (is_array($usuario)) ? $usuario[0] : $usuario;
 			//Arquivo
 			$msg .= "Classe: ".__CLASS__." Usuario ID: $usuario"." Request: ".$_SERVER['REQUEST_URI']."\r\n";
 			$msg .= "Hora: ".date("d/m/Y - H:i:s") . " " ."\r\n";
 			$msg .= "Erro [ {$this->exception->getCode()} ]: ".$this->exception->getFile()." ( Linha: {$this->exception->getLine()} ) " ."\r\n";
-			$msg .= "Mensagem Usuário:{$this->getMensagem($this->exception->getCode())} " ."\r\n";
+			$msg .= "Mensagem Usuário:{$this->getMensagem($this->exception)} " ."\r\n";
 			$msg .= "Mensagem Interna:{$this->exception->getMessage()} " ."\r\n";
 			$msg .= "Trace: "."\r\n";
 			$msg .= "{".$trace."} " ."\r\n";

@@ -1,6 +1,8 @@
 <?php
 // DEFINE Nome do Projeto
-	include_once(APP_DIR."config/config.php");
+	$config_app = APP_DIR.LGF_SUBAPP.DS."config".DS."config.php";
+	$config_app = str_replace("//","/",$config_app);
+	include_once($config_app);
 	define('LGF_VERSAO','v1.1.0');
 	date_default_timezone_set('America/Sao_Paulo');
 	
@@ -14,7 +16,7 @@
 // DEFINE Controller responsável por autenticar o usuario no sistema, este deve herdar a classe Autenticador
 	LGF_definirConstante("CONTROLLER_LOGIN","controller\\Login","controller\\".$_CONTROLLER_LOGIN);
 // DEFINE Link de Logout
-	LGF_definirConstante("LINK_LOGOUT",false,HTTP_PATH.'c/'.$_CONTROLLER_LOGIN.'/logout');
+	LGF_definirConstante("LINK_LOGOUT",false,HTTP_PATH.LGF_SUBAPP."/".'c/'.$_CONTROLLER_LOGIN.'/logout');
 // DEFINE template que será carregado se não houver um explicitamente definido, deve ser o nomedoarquivo.tpl;
 	LGF_definirConstante("TEMPLATE_PADRAO",'index.tpl',$_TEMPLATE_PADRAO);
 // DEFINE se o padrão para autenticação de acesso é exigida ou não (true/false)
