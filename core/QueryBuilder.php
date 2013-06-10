@@ -16,6 +16,11 @@ class QueryBuilder extends ConnectionFactory {
     private $orderOrientacao;
     private $group;
     private $limit;
+    private $campo1;
+    private $campo2;
+    private $camposSet;
+    private $listCampo;
+    private $echoQuery;
 
     public function __construct() {
         $this->modelo = null;
@@ -29,14 +34,30 @@ class QueryBuilder extends ConnectionFactory {
         $this->orderOrientacao = null;
         $this->group = array();
         $this->limit = null;
+        $this->campo1 = array();
+        $this->campo2 = array();
+        $this->camposSet = array();
+        $this->listCampo = array();
+    }
+    //para imprimir a query no projeto.
+    public function getPrintQuery(){
+         $this->echoQuery = true;
     }
 
+    public function setOr($campo1,$campo2){
+    	$this->campo1[$campo1] = $campo1;
+    	$this->campo2[$campo2] = $campo2;
+    	$this->camposSet[$campo1] = array($campo1,$campo2);
+    }
+    
     public function addWhereEquals($campo, $valor, $operador = "AND", $agrupamento = 0) {
         if ($valor != "") {
             $whr = ":where_eq_".preg_replace("/[^A-Za-z]/",'',$campo);
             //$this->query[$operador][$agrupamento][] = "$campo = :where_eq_$campo";
             $this->query[] = "$campo = $whr";
             $this->parametroWhere[$whr] = $valor;
+            $this->listCampo[]=$campo;
+            return $campo;
             
         }
     }
@@ -46,6 +67,8 @@ class QueryBuilder extends ConnectionFactory {
             $whr = ":where_df_".preg_replace("/[^A-Za-z]/",'',$campo);
             $this->query[] = "$campo != $whr";
             $this->parametroWhere[$whr] = $valor;
+            $this->listCampo[]=$campo;
+            return $campo;
         }
     }
 
@@ -54,6 +77,8 @@ class QueryBuilder extends ConnectionFactory {
             $whr = ":where_lk_".preg_replace("/[^A-Za-z]/",'',$campo);
             $this->query[] = "$campo LIKE '%$whr%'";
             $this->parametroWhere[$whr] = $valor;
+            $this->listCampo[]=$campo;
+            return $campo;
         }
     }
 
@@ -66,6 +91,8 @@ class QueryBuilder extends ConnectionFactory {
             $whr = ":where_in_".preg_replace("/[^A-Za-z]/",'',$campo);
             $this->query[] = "$campo in('$whr')";
             $this->parametroWhere[$whr] = $valor;
+            $this->listCampo[]=$campo;
+            return $campo;
         }
     }
 
@@ -78,6 +105,8 @@ class QueryBuilder extends ConnectionFactory {
             $whr = ":where_ni_".preg_replace("/[^A-Za-z]/",'',$campo);
             $this->query[] = "$campo not in('$whr')";
             $this->parametroWhere[$whr] = $valor;
+            $this->listCampo[]=$campo;
+            return $campo;
         }
     }
 
@@ -87,6 +116,8 @@ class QueryBuilder extends ConnectionFactory {
         $this->query[] = "$campo between '" . $whr . "_start' AND '".$whr."_end'";
         $this->parametroWhere[$whr.'_start'] = $start;
         $this->parametroWhere[$whr.'_end'] = $end;
+        $this->listCampo[]=$campo;
+        return $campo;
     }
 
     public function addWhereCustom($customWhere) {
@@ -117,13 +148,13 @@ class QueryBuilder extends ConnectionFactory {
         }
         else {
             throw new e\DaoException(
-                    'Par�metro $orientacao do addOrderBy() deve ser "ASC" ou "DESC"');
+                    'Parâmetro $orientacao do addOrderBy() deve ser "ASC" ou "DESC"');
         }
     }
     
     public function setLimit($limit, $inicio = null){
         if(!is_int($limit) || (!is_null($inicio) && !is_int($limit))){
-            throw new e\DaoException("Cl�usula 'LIMIT' deve ser do tipo INTEGER");
+            throw new e\DaoException("Cláusula 'LIMIT' deve ser do tipo INTEGER");
         }
         $this->limit = $limit;
         if(!is_null($inicio)){
@@ -145,10 +176,37 @@ class QueryBuilder extends ConnectionFactory {
             
         }
 
-        if (count($this->query) != 0) {
-            $query .= " WHERE ";
-            $query .= implode(" AND ", $this->query);
-        }
+    if(count($this->query) != 0){
+	$query .=" WHERE ";
+	$totalCampos = count($this->listCampo);
+	$total_query = count($this->query);
+	$x=-1;
+        $y=0;	  
+	  foreach($this->query as $key => $strQuery){
+		  $x++;
+		  $y++;
+		  $query .=$strQuery;
+		  //tratando a posição dos operadores AND / OR
+		  $operador = ($this->camposSet[$this->listCampo[$x]][0] == $this->listCampo[$x]) ? " OR " : " AND ";
+		   if(($operador == " OR " && $this->camposSet[$this->listCampo[$x]][1] == $this->listCampo[$y]) || $operador == " AND " || $operador == ""){
+		     $query .= ($total_query - 1 > $x ) ? $operador : "";
+		   }
+		   else
+		   {
+		   	//tratamento das exceções
+		   	$erroMsg = '<br>Reposicione-os de maneira sequencial.';
+		   	if($this->camposSet[$this->listCampo[$x]][0]==""){
+		   		$this->camposSet[$this->listCampo[$x]][0] = 'Campo(1) Nulo';
+		   		$erroMsg = '<br>Defina os dois campos onde deve haver a condição "OR".';
+		   	}
+		   	if($this->camposSet[$this->listCampo[$x]][1]==""){
+		   		$this->camposSet[$this->listCampo[$x]][1] = 'Campo(2) Nulo';
+		   		$erroMsg = '<br>Defina os dois campos onde deve haver a condição "OR".';
+		   	}
+			throw new e\DaoException('Não é possível atribuir a condição "OR" para os campos "'.$this->camposSet[$this->listCampo[$x]][0].'" e "'.$this->camposSet[$this->listCampo[$x]][1].'".'.$erroMsg);
+		   }
+	       }
+	}
         if (count($this->group) != 0) {
             $query .= " group by " . implode(",", $this->group);
         }
@@ -160,6 +218,11 @@ class QueryBuilder extends ConnectionFactory {
             $query .= " LIMIT " . $this->limit;
         }
         $this->__construct();
+        
+        if($this->echoQuery){
+        	//exibe a query quando o método getPrintQuery() é chamado.
+            echo "<div style=\"background:#eee!Important; display:block!Important; padding:10px 6px!Important; border:1px solid #ccc!Important; font-family:Courier New!Important; position:fixed!Important; width:78%!Important; left:50%!Important; margin-left:-41%!Important; z-index:999999!Important; font-size:14px; margin-top:5px;\">".$query."</div>"; 
+           }
         return $query;
     }
 
@@ -197,7 +260,7 @@ class QueryBuilder extends ConnectionFactory {
                 $query =  "DELETE FROM $this->tabela";
                 break;
             default:
-                throw new e\DaoException('Par�metro $operacao deve ser SELECT, UPDATE, INSERT ou DELETE.');
+                throw new e\DaoException('Parâmetro $operacao deve ser SELECT, UPDATE, INSERT ou DELETE.');
         }
         return $query;
     }
