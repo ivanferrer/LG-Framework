@@ -39,7 +39,7 @@ class QueryBuilder extends ConnectionFactory {
         $this->camposSet = array();
         $this->listCampo = array();
     }
-    //para imprimir a query trabalhada.
+    //para imprimir a query no projeto.
     public function getPrintQuery(){
          $this->echoQuery = true;
     }
@@ -177,37 +177,36 @@ class QueryBuilder extends ConnectionFactory {
         }
 
     if(count($this->query) != 0){
-			$query .=" WHERE ";
-			
-			$totalCampos = count($this->listCampo);
-			$total_query = count($this->query);
-			    // sort($this->query);
-				
-					$x=-1;
-			         $y=0;	  
-				  foreach($this->query as $key => $strQuery){
-						  $x++;
-						  $y++;
-						  $query .=$strQuery;
-						 $operador = ($this->camposSet[$this->listCampo[$x]][0] == $this->listCampo[$x]) ? " OR " : " AND ";
-						   if(($operador == " OR " && $this->camposSet[$this->listCampo[$x]][1] == $this->listCampo[$y]) || $operador == " AND " || $operador == ""){
-						     $query .= ($total_query - 1 > $x ) ? $operador : "";
-						   }
-						   else
-						   {
-						   	$erroMsg = '<br>Reposicione-os de maneira sequencial.';
-							   	if($this->camposSet[$this->listCampo[$x]][0]==""){
-							   		$this->camposSet[$this->listCampo[$x]][0] = 'Campo(1) Nulo';
-							   		$erroMsg = '<br>Defina os dois campos onde deve haver a condição "OR".';
-							   	}
-							   	if($this->camposSet[$this->listCampo[$x]][1]==""){
-							   		$this->camposSet[$this->listCampo[$x]][1] = 'Campo(2) Nulo';
-							   		$erroMsg = '<br>Defina os dois campos onde deve haver a condição "OR".';
-							   	}
-								throw new e\DaoException('Não é possível atribuir a condição "OR" para os campos "'.$this->camposSet[$this->listCampo[$x]][0].'" e "'.$this->camposSet[$this->listCampo[$x]][1].'".'.$erroMsg);
-						   }
-				       }
-		 }
+	$query .=" WHERE ";
+	$totalCampos = count($this->listCampo);
+	$total_query = count($this->query);
+	$x=-1;
+        $y=0;	  
+	  foreach($this->query as $key => $strQuery){
+		  $x++;
+		  $y++;
+		  $query .=$strQuery;
+		  //tratando a posição dos operadores AND / OR
+		  $operador = ($this->camposSet[$this->listCampo[$x]][0] == $this->listCampo[$x]) ? " OR " : " AND ";
+		   if(($operador == " OR " && $this->camposSet[$this->listCampo[$x]][1] == $this->listCampo[$y]) || $operador == " AND " || $operador == ""){
+		     $query .= ($total_query - 1 > $x ) ? $operador : "";
+		   }
+		   else
+		   {
+		   	//tratamento das exceções
+		   	$erroMsg = '<br>Reposicione-os de maneira sequencial.';
+		   	if($this->camposSet[$this->listCampo[$x]][0]==""){
+		   		$this->camposSet[$this->listCampo[$x]][0] = 'Campo(1) Nulo';
+		   		$erroMsg = '<br>Defina os dois campos onde deve haver a condição "OR".';
+		   	}
+		   	if($this->camposSet[$this->listCampo[$x]][1]==""){
+		   		$this->camposSet[$this->listCampo[$x]][1] = 'Campo(2) Nulo';
+		   		$erroMsg = '<br>Defina os dois campos onde deve haver a condição "OR".';
+		   	}
+			throw new e\DaoException('Não é possível atribuir a condição "OR" para os campos "'.$this->camposSet[$this->listCampo[$x]][0].'" e "'.$this->camposSet[$this->listCampo[$x]][1].'".'.$erroMsg);
+		   }
+	       }
+	}
         if (count($this->group) != 0) {
             $query .= " group by " . implode(",", $this->group);
         }
@@ -221,7 +220,7 @@ class QueryBuilder extends ConnectionFactory {
         $this->__construct();
         
         if($this->echoQuery){
-        	//para ver a query na página:
+        	//exibe a query quando o método getPrintQuery() é chamado.
             echo "<div style=\"background:#eee!Important; display:block!Important; padding:10px 6px!Important; border:1px solid #ccc!Important; font-family:Courier New!Important; position:fixed!Important; width:78%!Important; left:50%!Important; margin-left:-41%!Important; z-index:999999!Important; font-size:14px; margin-top:5px;\">".$query."</div>"; 
            }
         return $query;
