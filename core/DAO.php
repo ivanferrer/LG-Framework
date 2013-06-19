@@ -243,8 +243,10 @@ abstract class DAO extends ConnectionFactory{
     		    $return = array();
     		    $this->statement = $this->con->prepare($sql);
         		$this->statement->execute();
-        		while($row = $this->statement->fetch(\PDO::FETCH_ASSOC)){
-        			$return[] = $row;
+        	if (!preg_match('/^(update|delete|insert|UPDATE|DELETE|INSERT)/i', $sql)){
+	        		while($row = $this->statement->fetch(\PDO::FETCH_ASSOC)){
+	        			$return[] = $row;
+	        		}
         		}
         		
     		$this->encerrarQuery();
@@ -266,7 +268,7 @@ abstract class DAO extends ConnectionFactory{
 	 */
 	private function getMetodos(Modelo $obj, $tipo){
 		if($tipo != "get" && $tipo != "set")
-			throw new e\PHPException("0", 'Variável $tipo deve ser "get" ou "set"', __FILE__, __LINE__);
+			throw new e\PHPException("0", 'Variï¿½vel $tipo deve ser "get" ou "set"', __FILE__, __LINE__);
 		$_ref = new \ReflectionClass(get_class($obj));
 		$_ret = $_ref->getMethods(\ReflectionMethod::IS_PUBLIC);
 		foreach($_ret as $key => $value){
