@@ -171,16 +171,16 @@ class CrudTable {
                 }
             }
             $_return.='
-    		<td id="'.$this->id.'-'.$valor[$this->idField].'">
-    		    <a href="javascript:ajax_crud_alterar_call('.$valor[$this->idField].')" role="button">
-    		        <img class="icon" src="'.HTTP_FULL_PATH.'template/images/icon-edit.png"/>
-    	        </a>
-    		    <a href="javascript:ajax_crud_excluir_call('.$valor[$this->idField].')" role="button">
-    		        <img class="icon" src="'.HTTP_FULL_PATH.'template/images/icon-delete.png"/>
-    	        </a>
-    		    <!--<a href="javascript:ajax_crud_configurar_call()" role="button">
-    		        <img class="icon" src="'.HTTP_FULL_PATH.'template/images/icon-list.png"/>
-    	        </a>!-->
+            <td id="'.$this->id.'-'.$valor[$this->idField].'">
+                <a href="javascript:ajax_crud_alterar_call('.$valor[$this->idField].')" role="button">
+                    <img class="icon" src="'.HTTP_FULL_PATH.'template/images/icon-edit.png"/>
+                </a>
+                <a href="javascript:ajax_crud_excluir_call('.$valor[$this->idField].')" role="button">
+                    <img class="icon" src="'.HTTP_FULL_PATH.'template/images/icon-delete.png"/>
+                </a>
+                <!--<a href="javascript:ajax_crud_configurar_call()" role="button">
+                    <img class="icon" src="'.HTTP_FULL_PATH.'template/images/icon-list.png"/>
+                </a>!-->
             </td>';
             $_return.= "</tr>";
         }

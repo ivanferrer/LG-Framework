@@ -1,37 +1,37 @@
 <?php
 namespace lib;
 class Functions{
-	
-	public static function setObjectFromArray($object,$array){
-		foreach($array as $k => $v){
-			$str = str_replace("_"," ",$k);
-			$str = ucwords($str);
-			$str = str_replace(" ","",$str);
-			$f = 's';
-			$$f = 'set'.$str;
-			if(method_exists($object, $s)){
-				$object->$s($v);
-			}
-		}
-		return $object;
-	}
-	
-	public static function getObjectAsArray($object){
-		$campos = $object->getCamposTabela();
-		foreach($campos as $v){
-			$f = 'g';
-			$$f = 'get'.ucfirst($v);
-			if(method_exists($object, $g)){
-				$array[$v] = $object->$g();
-			}
-		}
-		return $array;
-	}
-	
-	public static function dateToMysql($data){
-		return implode('-',array_reverse(explode("/",$data)));
-	}
-	public static function is_mobile(){
+    
+    public static function setObjectFromArray($object,$array){
+        foreach($array as $k => $v){
+            $str = str_replace("_"," ",$k);
+            $str = ucwords($str);
+            $str = str_replace(" ","",$str);
+            $f = 's';
+            $$f = 'set'.$str;
+            if(method_exists($object, $s)){
+                $object->$s($v);
+            }
+        }
+        return $object;
+    }
+    
+    public static function getObjectAsArray($object){
+        $campos = $object->getCamposTabela();
+        foreach($campos as $v){
+            $f = 'g';
+            $$f = 'get'.ucfirst($v);
+            if(method_exists($object, $g)){
+                $array[$v] = $object->$g();
+            }
+        }
+        return $array;
+    }
+    
+    public static function dateToMysql($data){
+        return implode('-',array_reverse(explode("/",$data)));
+    }
+    public static function is_mobile(){
 
             $mobile_browser = '0';
 
@@ -72,92 +72,92 @@ class Functions{
 
     }
     
-	public static function sendMail($corpo ,$assunto ,array $destinatarios ,$CC = array(),$CCO = array(),$remetente = null,$remetenteNome = null,$anexo = null){
-	    include_once(LGF_PATH.DS."lib".DS."PHPMailer.php");
-		$mail = new \PHPMailer(true);
-		$mail->IsSMTP(); // enable SMTP
-		$mail->IsHTML();
-		$mail->SMTPDebug = 0;
-		$mail->SMTPAuth = true;  // authentication enabled
-		//$mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for GMail
-		$mail->Username = MAIL_USER;
-		$mail->Password = MAIL_PASS;
-		$mail->Host = MAIL_SMTP_HOST;
-		$mail->Port = MAIL_SMTP_PORT;
-		if(is_null($remetente)){
-			$mail->setFrom(MAIL_FROM,MAIL_FROM_NAME);
-		}else{
-			$mail->setFrom($remetente,$remetenteNome);
-		}
-		if(!is_null($anexo)){
-			$mail->AddAttachment($anexo);
-		}
-		$mail->Subject = $assunto;
-		$mail->Body = $corpo;
-		foreach($destinatarios as $email){
-			$mail->AddAddress($email);
-		}
-		$mail->Send();
-	}
-	
-	/**
-	 * Função pra tirar pontos e barras e traços de cnpjs e cpfs
-	 *
-	 */
-	public static function soNumeros($s) {
-		return preg_replace("/[^0-9]/",'',$s);
-	}
-	
-	/**
-	 * Função para validar o cpf
-	 * retorna true ou false
-	 */
-	public static function validaCPF($s){
-		$s = Functions::soNumeros($s);
-	
-		//verifica se tem mais que 11 catacteres, quando a merda é cnpj as vezes valida!
-		if(strlen($s)>11) return false;
-	
-		//verifica se os digitos são iguais, por incrivel que parece isso é válido!
-		$iguais = true;
-		for ($i=1; $i< strlen($s); $i++){
-			if (substr($s, $i, 1) != substr($s, ($i-1), 1)) $iguais = false;
-		}
-		if ($iguais) return false;
-	
-		$c = substr($s, 0, 9);
-		$dv = substr($s, 9, 2);
-		$d1 = 0;
-	
-		for ($i=0; $i<9; $i++) {
-			$d1+= substr($c, $i, 1)*(10-$i);
-		}
-		if ($d1 == false) return false;
-		$d1 = 11 - ($d1 % 11);
-		if ($d1 > 9) $d1 = 0;
-		if(substr($dv, 0, 1) != $d1) return false;
-	
-		$d1 *= 2;
-		for ($i=0; $i<9; $i++) {
-			$d1 += substr($c, $i, 1)*(11-$i);
-		}
-		$d1 = 11 - ($d1 % 11);
-		if ($d1 > 9) $d1 = 0;
-		if(substr($dv, 1, 1) != $d1) return false;
-	
-		return true;
-	}
-	
-	/**
-	 * Função para validar o CNPJ
-	 * retorna true ou false
-	 */
-	public static function validaCNPJ($cnpj) {
-	    for($i = 0; $i <= 9; $i++) {
-	        $fake = str_pad("", 14, $i);
-	        if($cnpj == $fake)
-	            return false;
-	    }
+    public static function sendMail($corpo ,$assunto ,array $destinatarios ,$CC = array(),$CCO = array(),$remetente = null,$remetenteNome = null,$anexo = null){
+        include_once(LGF_PATH.DS."lib".DS."PHPMailer.php");
+        $mail = new \PHPMailer(true);
+        $mail->IsSMTP(); // enable SMTP
+        $mail->IsHTML();
+        $mail->SMTPDebug = 0;
+        $mail->SMTPAuth = true;  // authentication enabled
+        //$mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for GMail
+        $mail->Username = MAIL_USER;
+        $mail->Password = MAIL_PASS;
+        $mail->Host = MAIL_SMTP_HOST;
+        $mail->Port = MAIL_SMTP_PORT;
+        if(is_null($remetente)){
+            $mail->setFrom(MAIL_FROM,MAIL_FROM_NAME);
+        }else{
+            $mail->setFrom($remetente,$remetenteNome);
+        }
+        if(!is_null($anexo)){
+            $mail->AddAttachment($anexo);
+        }
+        $mail->Subject = $assunto;
+        $mail->Body = $corpo;
+        foreach($destinatarios as $email){
+            $mail->AddAddress($email);
+        }
+        $mail->Send();
+    }
+    
+    /**
+     * Função pra tirar pontos e barras e traços de cnpjs e cpfs
+     *
+     */
+    public static function soNumeros($s) {
+        return preg_replace("/[^0-9]/",'',$s);
+    }
+    
+    /**
+     * Função para validar o cpf
+     * retorna true ou false
+     */
+    public static function validaCPF($s){
+        $s = Functions::soNumeros($s);
+    
+        //verifica se tem mais que 11 catacteres, quando a merda é cnpj as vezes valida!
+        if(strlen($s)>11) return false;
+    
+        //verifica se os digitos são iguais, por incrivel que parece isso é válido!
+        $iguais = true;
+        for ($i=1; $i< strlen($s); $i++){
+            if (substr($s, $i, 1) != substr($s, ($i-1), 1)) $iguais = false;
+        }
+        if ($iguais) return false;
+    
+        $c = substr($s, 0, 9);
+        $dv = substr($s, 9, 2);
+        $d1 = 0;
+    
+        for ($i=0; $i<9; $i++) {
+            $d1+= substr($c, $i, 1)*(10-$i);
+        }
+        if ($d1 == false) return false;
+        $d1 = 11 - ($d1 % 11);
+        if ($d1 > 9) $d1 = 0;
+        if(substr($dv, 0, 1) != $d1) return false;
+    
+        $d1 *= 2;
+        for ($i=0; $i<9; $i++) {
+            $d1 += substr($c, $i, 1)*(11-$i);
+        }
+        $d1 = 11 - ($d1 % 11);
+        if ($d1 > 9) $d1 = 0;
+        if(substr($dv, 1, 1) != $d1) return false;
+    
+        return true;
+    }
+    
+    /**
+     * Função para validar o CNPJ
+     * retorna true ou false
+     */
+    public static function validaCNPJ($cnpj) {
+        for($i = 0; $i <= 9; $i++) {
+            $fake = str_pad("", 14, $i);
+            if($cnpj == $fake)
+                return false;
+        }
         if(strlen($cnpj) <> 14){
             return false;
         }
@@ -181,75 +181,75 @@ class Functions{
             return false;
         }
         return true;
-	}
-	
-	public static function formatarDocumento ($string){
-	    $output = preg_replace("[' '-./ t]", '', $string);
-	    $size = (strlen($output) -2);
-    	if ($size != 9 && $size != 12) return false;
-    	$mask = ($size == 9) 
-    		? '###.###.###-##' 
-    		: '##.###.###/####-##'; 
-    	$index = -1;
-    	for ($i=0; $i < strlen($mask); $i++):
-    		if ($mask[$i]=='#') $mask[$i] = $output[++$index];
-    	endfor;
-    	return $mask;
-	}
-//*	
-	public static function toJson(array $array){
-		$dados = array();
-		foreach($array as $key => &$value){
-		    if(is_array($value)){
-		        foreach($value as $k => $val){
-		            $dados[$key][$k] = utf8_encode($val);
-		        }
-		    }else{
-		        $dados[$key] = utf8_encode($value); 
-		    }
-		}
-		return json_encode($dados);
-	}
-	
+    }
+    
+    public static function formatarDocumento ($string){
+        $output = preg_replace("[' '-./ t]", '', $string);
+        $size = (strlen($output) -2);
+        if ($size != 9 && $size != 12) return false;
+        $mask = ($size == 9) 
+            ? '###.###.###-##' 
+            : '##.###.###/####-##'; 
+        $index = -1;
+        for ($i=0; $i < strlen($mask); $i++):
+            if ($mask[$i]=='#') $mask[$i] = $output[++$index];
+        endfor;
+        return $mask;
+    }
+//*    
+    public static function toJson(array $array){
+        $dados = array();
+        foreach($array as $key => &$value){
+            if(is_array($value)){
+                foreach($value as $k => $val){
+                    $dados[$key][$k] = utf8_encode($val);
+                }
+            }else{
+                $dados[$key] = utf8_encode($value); 
+            }
+        }
+        return json_encode($dados);
+    }
+    
 
 /*/
-	public static function toJson(array $array){
-	    $dados = array();
+    public static function toJson(array $array){
+        $dados = array();
         $op = array("{","}");
-	    foreach($array as $key => &$value){
-	        if(is_array($value)){
-	            $dados[] = Functions::toJson($value);
-	            $op = array("[","]");
-	        }else{
-	            $dados[] .= '"'.$key.'":"'.$value.'"';
-	        }
-	    }
-	    $return = $op[0];
-	    $return.= implode(",",$dados);
-	    $return.= $op[1];
-	    return $return;
-	}
-	//*/
-	public static function buscaCEP($cep){
-	    $cep = preg_replace("/[^0-9]/",'',$cep);
-	    $ch = curl_init();
-	    curl_setopt($ch, CURLOPT_URL,'http://cep.republicavirtual.com.br/web_cep.php?cep='.$cep);
-	    curl_setopt($ch, CURLOPT_FAILONERROR,1);
-	    curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
-	    curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
-	    curl_setopt($ch, CURLOPT_TIMEOUT, 15);
-	    $retValue = curl_exec($ch);
-	    curl_close($ch);
-	    $xml = new \SimpleXMLElement($retValue);
-	    $rua=$xml->tipo_logradouro." ".$xml->logradouro;
-	    $rua = ($rua == ' ') ? "" : $rua;
-	    $bairro=$xml->bairro;
-	    $cidade=$xml->cidade;
-	    $uf=$xml->uf;
-	    return '{"endereco":"'.utf8_decode($rua).'","bairro":"'.utf8_decode($bairro).'","cidade":"'.utf8_decode($cidade).'","uf":"'.utf8_decode($uf).'"}';
-	}
-	
-	public static function CalculaDigitoMod11($numero){
+        foreach($array as $key => &$value){
+            if(is_array($value)){
+                $dados[] = Functions::toJson($value);
+                $op = array("[","]");
+            }else{
+                $dados[] .= '"'.$key.'":"'.$value.'"';
+            }
+        }
+        $return = $op[0];
+        $return.= implode(",",$dados);
+        $return.= $op[1];
+        return $return;
+    }
+    //*/
+    public static function buscaCEP($cep){
+        $cep = preg_replace("/[^0-9]/",'',$cep);
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL,'http://cep.republicavirtual.com.br/web_cep.php?cep='.$cep);
+        curl_setopt($ch, CURLOPT_FAILONERROR,1);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 15);
+        $retValue = curl_exec($ch);
+        curl_close($ch);
+        $xml = new \SimpleXMLElement($retValue);
+        $rua=$xml->tipo_logradouro." ".$xml->logradouro;
+        $rua = ($rua == ' ') ? "" : $rua;
+        $bairro=$xml->bairro;
+        $cidade=$xml->cidade;
+        $uf=$xml->uf;
+        return '{"endereco":"'.utf8_decode($rua).'","bairro":"'.utf8_decode($bairro).'","cidade":"'.utf8_decode($cidade).'","uf":"'.utf8_decode($uf).'"}';
+    }
+    
+    public static function CalculaDigitoMod11($numero){
          $base = 9;
          $result = 0;
          $sum = 0;
@@ -276,5 +276,5 @@ class Functions{
              $rest = $sum % 11;
              return $rest;
          }
-	}
+    }
 }

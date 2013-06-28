@@ -46,11 +46,11 @@ class Form {
     
 
     public static function fromObject($object,$campoId){
-    	$dao = new DAO();
-    	$ret = $dao->describe($object);
-    	foreach($ret as $describe){
-    		$describe->getField();
-    	}
+        $dao = new DAO();
+        $ret = $dao->describe($object);
+        foreach($ret as $describe){
+            $describe->getField();
+        }
     }
                             
 }

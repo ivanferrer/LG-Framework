@@ -84,7 +84,7 @@ class QueryBuilder extends ConnectionFactory {
     public function addWhereBetween($campo, $start, $end) {
 
         $whr = ":where_dt_".preg_replace("/[^A-Za-z]/",'',$campo);
-        $this->query[] = "$campo between '" . $whr . "_start' AND '".$whr."_end'";
+        $this->query[] = "$campo between " . $whr . "_start AND ".$whr."_end";
         $this->parametroWhere[$whr.'_start'] = $start;
         $this->parametroWhere[$whr.'_end'] = $end;
     }
@@ -175,16 +175,16 @@ class QueryBuilder extends ConnectionFactory {
                 break;
             case 'UPDATE':
                 foreach($this->campos as $campo){
-		            $pk = $this->modelo->getChavePrimaria();
-		            if(is_array($pk)){
-		                if(!in_array($campo,$pk)){
-		                    $campos[] = $campo." = :".$campo;
-		                }
-		            }else{
-    		            if($campo != $pk){
-    		                $campos[] = $campo." = :".$campo;
-    		            }
-		            }
+                    $pk = $this->modelo->getChavePrimaria();
+                    if(is_array($pk)){
+                        if(!in_array($campo,$pk)){
+                            $campos[] = $campo." = :".$campo;
+                        }
+                    }else{
+                        if($campo != $pk){
+                            $campos[] = $campo." = :".$campo;
+                        }
+                    }
                 }
                 $query =  "UPDATE $this->tabela SET ".implode(", ",$campos);
                 break;

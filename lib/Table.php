@@ -93,10 +93,10 @@ class Table {
         return $_return;
     }
     
-    public function addLink($nomeColuna,$url,$campoParametroUrl,$imagemSrc = null,$target = "_self"){
+    public function addLink($nomeColuna,$url,$campoParametroUrl,$foundicon = null,$target = "_self"){
         $this->campos[$nomeColuna] = $nomeColuna;
         $this->addCampoExibir($nomeColuna);
-        $image = (is_null($imagemSrc)) ? $nomeColuna : "<img width=20 height=20 src='$imagemSrc' />";
+        $image = (is_null($foundicon)) ? $nomeColuna : '<i class="foundicon-'.$foundicon.'"></i>';//"<img width=20 height=20 src='$imagemSrc' />";
         foreach($this->valores as &$valor){
             $html = "<a target='$target' href='".$url.$valor[$campoParametroUrl]."'>".$image."</a>";
             $valor[$nomeColuna] = $html;

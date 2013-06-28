@@ -77,8 +77,8 @@ class phpSEO{
     //config params: 
     /////////$text 
     function setText($text){ 
-    	$text = html_entity_decode($text,ENT_QUOTES,$this->charset);
-    	$text = strip_tags($text);//erases any html markup
+        $text = html_entity_decode($text,ENT_QUOTES,$this->charset);
+        $text = strip_tags($text);//erases any html markup
         $text = preg_replace('/\s\s+/', ' ', $text);//erase possible duplicated white spaces
         $text = str_replace (array('\r\n', '\n', '+'), ',', $text);//replace possible returns 
         $text = trim($text); 

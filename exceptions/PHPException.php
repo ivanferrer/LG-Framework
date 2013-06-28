@@ -49,9 +49,9 @@ class PHPException extends \Exception
      */
     static public function throwError($code, $message, $file, $line)
     {
-    	if(strstr($file,"autoload.php") === false){
-   	    	throw new PHPException($code, $message, $file, $line);
-    	}
+        if(strstr($file,"autoload.php") === false){
+               throw new PHPException($code, $message, $file, $line);
+        }
     }
     
     
